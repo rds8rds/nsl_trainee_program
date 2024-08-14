@@ -2,6 +2,11 @@
 
 ### Four Piller of OPP
 
+- Abstraction 
+- Encapsulation
+- Inheritance 
+- Polymorphism 
+
 #### Abstraction
 Abstraction is idea of hiding complex details of a class to its end user; A user might not need to know all the details of a class to use it; We can achieve this by using abstract class and interface some example: 
 
@@ -100,7 +105,78 @@ class Duck implements Animal, Swimmable {
 ```
 
 #### Encapsulation
+
+The idea of encapsulting all the related things of a class to its scope, Encapsulation makes the code more organized.
+Related Topic: Class Composition
+
+``` java 
+
+class Guitarist{
+	public String guitar_type, experience_days, mood; 
+	private Boolean willPlayToday = false; 
+	
+	public Guitarist(String guitar_type, String experience_days, String mood) {
+		this.guitar_type = guitar_type; 
+		this.experience_days = experience_days;
+		this.mood = mood; 
+	}
+	
+	public void cheerUp() {
+		willPlayToday = true; 
+	}
+	
+	public void guitaristStatus() {
+		System.out.println("Guitar Type: "+ guitar_type + "\n Experience Days: " + experience_days + "\n mood: "+ mood + "willPlayToday: " + willPlayToday    );
+	}
+	
+}
+
+// main function 
+
+	public static void main(String[] args) {
+
+		Guitarist dhruba = new Guitarist("calssical", "two years", "happy");
+		dhruba.cheerUp(); 
+		dhruba.guitaristStatus();
+		
+		dhruba = null; 
+		System.gc();
+	}
+
+
+```
 #### Inheritance
+
+Sub class is alowed to inherit properties from its base class, [creating new class based on another class]
+
+Why we need this : 
+    - code reusablity
+    - Method overriding
+    - Abstraction 
+
+** java doesn't support class based multiple inheritance, it suporrts multilevel inheritance; 
+** also doesn't support hybrid inheritance; 
+
+
 #### Polymorphism
 
 Abstraction: 
+
+
+
+
+
+
+
+
+
+
+### Requirements:
+
+sychronised
+null handling 
+
+Presentation and Clean Code; 
+Slide and Doc, 
+Agggregation, Composition
+abstraction better than polymorhism 
