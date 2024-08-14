@@ -157,8 +157,104 @@ Why we need this :
 ** java doesn't support class based multiple inheritance, it suporrts multilevel inheritance; 
 ** also doesn't support hybrid inheritance; 
 
+``` java
+// Parent class
+class One {
+    public void print_geek()
+    {
+        System.out.println("Geeks");
+    }
+}
+
+class Two extends One {
+    public void print_for() { System.out.println("for"); }
+}
+
+// Driver class
+public class Main {
+      // Main function
+    public static void main(String[] args)
+    {
+        Two g = new Two();
+        g.print_geek();
+        g.print_for();
+        g.print_geek();
+    }
+}
+
+```
+
+##### Interface based Inheritance: 
+What is an Interface ?
+---> its a referance type [much like a string!]
+---> similar to class can contain only constants and method signatures[but not implementations]
+---> Only exception is for static and default methods; 
+    ---> defualt methods are intorduced for backwar compatiblity 
+
+``` java 
+interface Animal{
+	void sleep();
+	
+	default void bark() {
+		System.out.println("animal Barks!");
+	}
+}
+
+interface Mammal{
+	Boolean isInteligent = true; 
+}
+
+
+class Dog implements Animal, Mammal{
+	public void sleep() {
+		System.out.println("A dog is sleeping!");
+	}
+	
+	@Override
+	public void bark() {
+		System.out.println("Now Dog Barks Barks!");
+	}
+	
+	public Dog() {
+		System.out.println(isInteligent);
+	}
+}
+
+```
 
 #### Polymorphism
+- Polymorphism
+ - Runtime Polymorphism
+    - Function Overriding 
+ - Compiletime Polymorphism 
+    - Function Overloading 
+    - Operator Overloading 
+
+Functional overloading example: 
+``` java 
+// functional overloading 
+class ComplexNumber{
+	private double real, imaginary; 
+	
+	public ComplexNumber(double real, double imaginary) {
+		this.real = real; 
+		this.imaginary = imaginary; 
+	}
+	
+	// add real parts 
+	public int add(int x) {
+		return (int)this.real + x;
+	}
+	// add two complex number 
+	public ComplexNumber add(ComplexNumber x) {
+		return new ComplexNumber(this.real + x.real, this.imaginary + x.imaginary); 
+	}
+	
+	public void printComplex() {
+		System.out.println(real + "i + "+imaginary+"j" );
+	}
+}
+```
 
 Abstraction: 
 
