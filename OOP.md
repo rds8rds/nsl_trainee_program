@@ -1,6 +1,6 @@
 ## OOP topics (Java Based): 
 
-### Four Piller of OPP
+### Four Pillers of OPP
 
 - Abstraction 
 - Encapsulation
@@ -361,14 +361,196 @@ public class Main {
 
 ```
 
+### Class Relations: 
+
+Class Relationships: In object-oriented programming (OOP), classes can have various types of relationships that define how they interact with each other. Understanding these relationships is crucial for designing systems that are maintainable, scalable, and intuitive. Here are the key types of relationships among classes:
+
+Class Relationships: 
+	- Inheritance (Is - a)
+	- Association (Has - A)
+		- Aggregation  [ Weak   Has - A ]
+		- Compostition [ Strong Has - A ]
+	- Dependency 
+	- Realization
+
+#### 1. Inheritance (Is-A Relationship)
+Inheritance is a relationship where one class (the subclass or derived class) inherits the properties and behaviors (fields and methods) of another class (the superclass or base class). This is often described as an "is-a" relationship.
+
+Example:
+Dog is a subclass of Animal.
+Dog "is-a" Animal.
+
+``` java 
+class Animal {
+    void eat() {
+        System.out.println("This animal eats.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();  // Inherited from Animal
+        dog.bark(); // Defined in Dog
+    }
+}
+
+```
+#### 2. Association (Has-A Relationship)
+
+Association is a relationship where one class uses or is associated with another class. This can be further broken down into aggregation and composition.
+
+##### 2.1 Aggregation (Weak Has-A Relationship)
+
+Aggregation is a form of association where one class contains a reference to another class, but the contained object can exist independently of the container.
+
+Example:
+**Library** has **Books**.
+**Books** can exist without the **Library**.
 
 
+``` java 
+class Book {
+    private String title;
 
+    public Book(String title) {
+        this.title = title;
+    }
 
+    public String getTitle() {
+        return title;
+    }
+}
 
+class Library {
+    private List<Book> books;
 
+    public Library(List<Book> books) {
+        this.books = books;
+    }
 
+    public void displayBooks() {
+        for (Book book : books) {
+            System.out.println(book.getTitle());
+        }
+    }
+}
 
+```
+##### 2.2 Composition (Strong Has-A Relationship)
+
+Composition is a form of association where one class is composed of other classes. The composed objects cannot exist independently of the container.
+
+Example:
+Car has an Engine.
+Engine cannot exist without the Car.
+
+``` java 
+class Engine {
+    private String type;
+
+    public Engine(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(String engineType) {
+        this.engine = new Engine(engineType);
+    }
+
+    public void start() {
+        System.out.println("Car with " + engine.getType() + " engine is starting.");
+    }
+}
+
+```
+#### 3. Dependency (Uses-A Relationship)
+
+Dependency is a relationship where one class depends on another class. This relationship is often described as a "uses-a" relationship. The dependent class needs the other class to function, typically by calling its methods or using its data.
+
+Example:
+Driver uses Car.
+Driver "uses-a" Car to drive.
+
+``` java
+class Car {
+    public void drive() {
+        System.out.println("Car is being driven.");
+    }
+}
+
+class Driver {
+    public void driveCar(Car car) {
+        car.drive();
+    }
+}
+
+```
+#### 4. Realization (Implements Relationship)
+
+``` java
+interface Flyable {
+    void fly();
+}
+
+class Bird implements Flyable {
+    public void fly() {
+        System.out.println("Bird is flying.");
+    }
+}
+
+```
+
+#### 5. Generalization
+
+Generalization is a relationship where a general concept or class is defined, and other classes inherit from this general class. This is closely related to inheritance but focuses on the abstraction aspect, where the superclass is a generalized form of the subclasses.
+
+Example:
+Vehicle is a general class.
+Car, Bike, and Truck are specific forms of Vehicle.
+
+``` java
+class Vehicle {
+    void move() {
+        System.out.println("Vehicle is moving.");
+    }
+}
+
+class Car extends Vehicle {
+    void drive() {
+        System.out.println("Car is driving.");
+    }
+}
+
+class Bike extends Vehicle {
+    void pedal() {
+        System.out.println("Bike is pedaling.");
+    }
+}
+
+```
+
+#### Summary of Relationships:
+**Inheritance (Is-A):** A subclass inherits from a superclass.
+**Association (Has-A):** A class is associated with another class.
+**Aggregation:** The associated object can exist independently.
+**Composition:** The associated object cannot exist independently.
+**Dependency (Uses-A):** A class uses another class to perform its functions.
+**Realization (Implements):** A class implements an interface.
+**Generalization:** A general concept or class is inherited by more specific 
 
 ## Next Topics to work on:
 
