@@ -44,14 +44,14 @@ public class Basic_oop_concepts {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		NoviceUser nibaron = new NoviceUser("Nibaron Kumar Das", 25, true );
-		nibaron.createProblem();
+		User sojib = new NoviceUser("Arafat Hossain Sojib", 25, true );
+		sojib.createProblem();
 		
 	}
 
 }
 ```
-Interface based; Multiple inheritance support available; 
+**Interface** based; Multiple inheritance support available; 
 ``` java
 interface Animal {
     void makeSound();  // Abstract method
@@ -79,6 +79,7 @@ public class Main {
 }
 
 
+// inherit from multiple inheritance 
 interface Swimmable {
     void swim();
 }
@@ -100,7 +101,12 @@ class Duck implements Animal, Swimmable {
     }
 }
 
-// we can see the results in main methods; 
+// we can reflect the results in main methods; like
+/*
+** Duck quak_quack = new Duck();
+** quak_quack.makeSound(); --> outputs Quack
+** quack_quack.swim(); --> Duck is swinmming; 
+*/
 
 ```
 
@@ -139,15 +145,27 @@ class Guitarist{
 		dhruba.cheerUp(); 
 		dhruba.guitaristStatus();
 		
+
+		// clearing the object; 
 		dhruba = null; 
 		System.gc();
 	}
 
-
 ```
+##### Access Specifier:
+
+how the class variables and methods can be accessed from its instance, or from its child instance or outside of this class;
+
+| Access Specifier | Class | Package | Subclass | World |
+|------------------|-------|---------|----------|-------|
+| `private`        | ✅    | ❌      | ❌       | ❌    |
+| `default` (no modifier) | ✅    | ✅      | ❌       | ❌    |
+| `protected`      | ✅    | ✅      | ✅       | ❌    |
+| `public`         | ✅    | ✅      | ✅       | ✅    |
+
 #### Inheritance
 
-Sub class is alowed to inherit properties from its base class, [creating new class based on another class]
+Sub class is alowed to inherit properties from its base class, [creating new sub class based on base class]
 
 Why we need this : 
     - code reusablity
@@ -186,10 +204,10 @@ public class Main {
 
 ##### Interface based Inheritance: 
 What is an Interface ?
----> its a referance type [much like a string!]
----> similar to class can contain only constants and method signatures[but not implementations]
----> Only exception is for static and default methods; 
-    ---> defualt methods are intorduced for backwar compatiblity 
+---> It is a **referance** type [much like a String in java!]
+---> similar to class can contain **only constants and method signatures**[but not implementations]
+---> Only **exception** is for **static** and **default methods** (where implementations are allowed); 
+    ---> defualt methods are intorduced for backward compatiblity 
 
 ``` java 
 interface Animal{
@@ -218,19 +236,27 @@ class Dog implements Animal, Mammal{
 	public Dog() {
 		System.out.println(isInteligent);
 	}
+
+	public static void main(String args[]){
+		Dog husky = new Dog();
+
+		// we can call any Dog methods: 
+		husky.bark(); 
+	}
 }
 
 ```
 
 #### Polymorphism
 - Polymorphism
- - Runtime Polymorphism
-    - Function Overriding 
  - Compiletime Polymorphism 
     - Function Overloading 
-    - Operator Overloading 
+    - Operator Overloading (not present in java)
+ - Runtime Polymorphism
+    - Function Overriding 
 
-Functional overloading example: 
+##### Functional overloading example: (compiletime polymorphism)
+
 ``` java 
 // functional overloading 
 class ComplexNumber{
@@ -253,10 +279,87 @@ class ComplexNumber{
 	public void printComplex() {
 		System.out.println(real + "i + "+imaginary+"j" );
 	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ComplexNumber x = new ComplexNumber(5.3, 4), y = new ComplexNumber(2.3, 5);
+		ComplexNumber res = x.add(y);
+		System.out.println("check operator overloading: " + res.add(3));
+		
+		res.printComplex();
+	}
 }
 ```
+##### Functional Overriding (Runtime polymorhism):
+In Java, method overriding is commonly used in collections, especially with classes like List and ArrayList. The List interface defines a set of methods that any list-type class must implement, and ArrayList is one of the most commonly used implementations of the List interface.
 
-Abstraction: 
+``` java
+public interface List<E> {
+    boolean add(E e);
+    E get(int index);
+    E remove(int index);
+    int size();
+    // Other methods
+}
+
+
+public class ArrayList<E> implements List<E> {
+    // Internal array to store elements
+    private Object[] elementData;
+    
+    @Override
+    public boolean add(E e) {
+        // Implementation for adding an element to the list
+    }
+    
+    @Override
+    public E get(int index) {
+        // Implementation for getting an element at a specific index
+    }
+
+    @Override
+    public E remove(int index) {
+        // Implementation for removing an element at a specific index
+    }
+    
+    @Override
+    public int size() {
+        // Implementation for getting the size of the list
+    }
+    
+    // Other methods and additional functionality
+}
+
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        // Using List as the reference type
+        List<Integer> numbers = new ArrayList<>();
+
+        // Adding elements (overrides List's add method)
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+
+        // Accessing elements (overrides List's get method)
+        System.out.println("Element at index 1: " + numbers.get(1));
+
+        // Removing an element (overrides List's remove method)
+        numbers.remove(1);
+
+        // Checking size (overrides List's size method)
+        System.out.println("Size after removal: " + numbers.size());
+        
+        // Printing the final list
+        System.out.println("Final List: " + numbers);
+    }
+}
+
+
+```
 
 
 
