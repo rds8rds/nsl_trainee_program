@@ -370,10 +370,15 @@ public class Main {
 
 
 
-### Requirements:
+## Next Topics to work on:
 
-sychronised
-null handling 
+Class Relationships: 
+	- Inheritance (Is - a)
+	- Association (Has - A)
+		- Aggregation  [ Weak   Has - A ]
+		- Compostition [ Strong Has - A ]
+	- Dependency 
+	- Realization
 
 Presentation and Clean Code; 
 Slide and Doc, 
