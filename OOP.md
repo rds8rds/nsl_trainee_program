@@ -203,10 +203,11 @@ public class Main {
 ```
 
 ##### Interface based Inheritance: 
-What is an Interface ?
-It is a **referance** type [much like a String in java!]
-similar to class can contain **only constants and method signatures**[but not implementations]
-Only **exception** is for **static** and **default methods** (where implementations are allowed);defualt methods are intorduced for backward compatiblity 
+What is an Interface :
+- It is a **referance** type [much like a String in java!]
+- similar to class can contain **only constants and method signatures**[but not implementations]
+- Only **exception** is for **static** and **default methods** (where implementations are allowed)
+	- defualt methods are intorduced for backward compatiblity 
 
 ``` java 
 interface Animal{
