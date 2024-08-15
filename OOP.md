@@ -17,8 +17,8 @@ note : java doesn't allow multiple inheritance, but allows multilevel inheritanc
 // class based 
 abstract class User{
 	
-	String name;
-	int age; 
+	protected String name;
+	protected int age; 
 	
 	abstract void createProblem();
 	
@@ -204,10 +204,9 @@ public class Main {
 
 ##### Interface based Inheritance: 
 What is an Interface ?
----> It is a **referance** type [much like a String in java!]
----> similar to class can contain **only constants and method signatures**[but not implementations]
----> Only **exception** is for **static** and **default methods** (where implementations are allowed); 
-    ---> defualt methods are intorduced for backward compatiblity 
+It is a **referance** type [much like a String in java!]
+similar to class can contain **only constants and method signatures**[but not implementations]
+Only **exception** is for **static** and **default methods** (where implementations are allowed);defualt methods are intorduced for backward compatiblity 
 
 ``` java 
 interface Animal{
