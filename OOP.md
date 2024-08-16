@@ -557,13 +557,13 @@ class Bike extends Vehicle {
 
 #### Summary of Relationships:
 
-**Inheritance (Is-A):** A subclass inherits from a superclass.
-**Association (Has-A):** A class is associated with another class.
-**Aggregation:** The associated object can exist independently.
-**Composition:** The associated object cannot exist independently.
-**Dependency (Uses-A):** A class uses another class to perform its functions.
-**Realization (Implements):** A class implements an interface.
-**Generalization:** A general concept or class is inherited by more specific
+- **Inheritance (Is-A):** A subclass inherits from a superclass.
+- **Association (Has-A):** A class is associated with another class.
+- **Aggregation:** The associated object can exist independently.
+- **Composition:** The associated object cannot exist independently.
+- **Dependency (Uses-A):** A class uses another class to perform its functions.
+- **Realization (Implements):** A class implements an interface.
+- **Generalization:** A general concept or class is inherited by more specific
 
 ### Why Association is always preferred over Aggregation ?
 
