@@ -2,10 +2,10 @@
 
 Object-Oriented Programming (OOP) is a programming paradigm where "objects" contain both data (attributes) and code (methods). It organizes code into modular units and promotes reuse through inheritance.
 
+## 1. Class and Objects
 
-## 1. Class and Objects: 
+### 1.1 Class
 
-### 1.1 Class: 
 A class is a blueprint or prototype from which objects are created.
 It defines the structure and behavior that the objects will have.
 
@@ -13,7 +13,7 @@ It defines the structure and behavior that the objects will have.
   - **Attributes:** Define the properties or state of the class (e.g., brand, model, year).
   - **Methods:** Define the behaviors or actions that objects of the class can perform (e.g., startEngine()).
 
-### 1.2 Object: 
+### 1.2 Object
 
 - An object is an instance of a class.
 - It represents a concrete entity with state and behavior.
@@ -21,7 +21,6 @@ It defines the structure and behavior that the objects will have.
 - Attributes and Methods:
   - Attributes: Store the current state or values of the object (e.g., myCar.brand, myCar.model).
   - Methods: Perform actions on the object's data or define the object’s behavior (e.g., myCar.startEngine()).
-
 
 ### Four Pillers of OOP
 
@@ -49,37 +48,37 @@ It defines the structure and behavior that the objects will have.
 // class based
 abstract class User{
 
-	protected String name;
-	protected int age;
+ protected String name;
+ protected int age;
 
-	abstract void createProblem();
+ abstract void createProblem();
 
 }
 
 class NoviceUser extends User{
-	boolean isDumb = true;
+ boolean isDumb = true;
 
     @Override
-	void createProblem() {
-		System.out.println("Novice always create unnecessary issues!");
-	}
+ void createProblem() {
+  System.out.println("Novice always create unnecessary issues!");
+ }
 
-	public NoviceUser(String name, int age, boolean isDumb) {
-		this.name = name;
-		this.age = age;
-		this.isDumb = isDumb;
-	}
+ public NoviceUser(String name, int age, boolean isDumb) {
+  this.name = name;
+  this.age = age;
+  this.isDumb = isDumb;
+ }
 }
 
 public class BasicOopConcepts {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+ public static void main(String[] args) {
+  // TODO Auto-generated method stub
 
-		User sojib = new NoviceUser("Arafat Hossain Sojib", 25, true );
-		sojib.createProblem();
+  User sojib = new NoviceUser("Arafat Hossain Sojib", 25, true );
+  sojib.createProblem();
 
-	}
+ }
 
 }
 ```
@@ -150,10 +149,10 @@ The idea of encapsulting all the related things of a class to its scope.
 It involves bundling the data (attributes) and methods (functions) into a single unit, typically a class. It restricts direct access to some of the object's components.
 
 **Achieving Encapsulation in Java**
+
 - **i. Declare Variables as Private**: Make the data members (variables) of the class private to restrict direct access from outside the class.
 
 - **ii. Provide Public Getters and Setters**: Define public methods (getters and setters) to access and update the private variables. This allows controlled access to the data.
-
 
 **Advantages of Encapsulation:**
 
@@ -165,43 +164,48 @@ It involves bundling the data (attributes) and methods (functions) into a single
 
 ```java
 
+
 class Guitarist{
-	public String guitar_type, experience_days, mood;
-	private Boolean willPlayToday = false;
-
+	private String guitar_type, experience_days, mood; 
+	private Boolean willPlayToday = false; 
+	
 	public Guitarist(String guitar_type, String experience_days, String mood) {
-		this.guitar_type = guitar_type;
+		this.guitar_type = guitar_type; 
 		this.experience_days = experience_days;
-		this.mood = mood;
+		this.mood = mood; 
 	}
-
+	
 	public void cheerUp() {
-		willPlayToday = true;
+		willPlayToday = true; 
 	}
-
+	
 	public void guitaristStatus() {
-		System.out.println("Guitar Type: "+ guitar_type + "\n Experience Days: " + experience_days + "\n mood: "+ mood + "willPlayToday: " + willPlayToday    );
+		System.out.println(this);
 	}
-
-}
-
+	
+	@Override
+    public String toString() {
+        return guitar_type + " " + experience_days + " "+willPlayToday;
+    }
+	
 // main function
 
-	public static void main(String[] args) {
+ public static void main(String[] args) {
 
-		Guitarist dhruba = new Guitarist("calssical", "two years", "happy");
-		dhruba.cheerUp();
-		dhruba.guitaristStatus();
+  Guitarist mike = new Guitarist("calssical", "two years", "happy");
+	mike.cheerUp(); 
+	mike.guitaristStatus();
 
-
-		// clearing the object;
-		dhruba = null;
-		System.gc();
-	}
+  // clearing the object;
+  mike = null;
+  System.gc();
+ }
 
 ```
 
-### 3.1 Access Specifier:
+**Explanation:** Here the to access the Guitarist class attributes, we have to use a getter method and here that is guitaristStatus(); we can't get the info outside of using this very function() whick in concept wise totally in sync with the Encapsulation Idea;
+
+### 3.1 Access Specifier
 
 How the class variables and methods can be accessed from its instances, or from its child instances or outside of this class;
 
@@ -218,7 +222,7 @@ Sub class is alowed to inherit properties from its base class, [creating new sub
 
 Why we need this : - code reusablity - Method overriding - Abstraction
 
-** java doesn't support class based multiple inheritance, it suporrts multilevel inheritance;
+**java doesn't support class based multiple inheritance, it supports multilevel inheritance;
 ** also doesn't support hybrid inheritance;
 
 ```java
@@ -248,7 +252,7 @@ public class Main {
 
 ```
 
-### 4.1 Interface based Inheritance:
+### 4.1 Interface based Inheritance
 
 What is an Interface :
 
@@ -260,40 +264,38 @@ What is an Interface :
 ```java
 interface Animal{
 	void sleep();
-
+	
 	default void bark() {
 		System.out.println("animal Barks!");
 	}
 }
 
-interface Mammal{
-	Boolean isInteligent = true;
+interface Mammal extends Animal{
+	public Boolean isInteligent = true; 
 }
 
 
-class Dog implements Animal, Mammal{
-	public void sleep() {
-		System.out.println("A dog is sleeping!");
-	}
+class Dog implements Mammal{
+ public void sleep() {
+  System.out.println("A dog is sleeping!");
+ }
 
-	@Override
-	public void bark() {
-		System.out.println("Now Dog Barks Barks!");
-	}
+ public Dog() {
+  System.out.println("new dog is created");
+ }
 
-	public Dog() {
-		System.out.println(isInteligent);
-	}
+ public static void main(String args[]){
+  Dog husky = new Dog();
 
-	public static void main(String args[]){
-		Dog husky = new Dog();
-
-		// we can call any Dog methods:
-		husky.bark();
-	}
+  // we can call any Dog methods:
+  husky.bark();
+  System.out.println(henry.isInteligent);
+ }
 }
 
 ```
+
+**Explanation:** Mammal interface inherits some features from Animal interface and then we implement Mammal inside Dog class; 
 
 ## 5. Polymorphism
 
@@ -307,44 +309,88 @@ The main idea behind polymorphism is that a single function or method can work i
   - Function Overriding
 
 ### 5. 1 Functional overloading example: (compiletime polymorphism)
+
 With method overloading, multiple methods can have the same name with different parameters:
 
 ```java
 // functional overloading
 class ComplexNumber{
-	private double real, imaginary;
+ private double real, imaginary;
 
-	public ComplexNumber(double real, double imaginary) {
-		this.real = real;
-		this.imaginary = imaginary;
-	}
+ public ComplexNumber(double real, double imaginary) {
+  this.real = real;
+  this.imaginary = imaginary;
+ }
 
-	// add real parts
-	public int add(int x) {
-		return (int)this.real + x;
-	}
-	// add two complex number
-	public ComplexNumber add(ComplexNumber x) {
-		return new ComplexNumber(this.real + x.real, this.imaginary + x.imaginary);
-	}
+ // add real parts
+ public int add(int x) {
+  return (int)this.real + x;
+ }
+ // add two complex number
+ public ComplexNumber add(ComplexNumber x) {
+  return new ComplexNumber(this.real + x.real, this.imaginary + x.imaginary);
+ }
 
-	public void printComplex() {
-		System.out.println(real + "i + "+imaginary+"j" );
-	}
+ public void printComplex() {
+  System.out.println(real + "i + "+imaginary+"j" );
+ }
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ComplexNumber x = new ComplexNumber(5.3, 4), y = new ComplexNumber(2.3, 5);
-		ComplexNumber res = x.add(y);
-		System.out.println("check operator overloading: " + res.add(3));
+ public static void main(String[] args) {
+  // TODO Auto-generated method stub
+  ComplexNumber x = new ComplexNumber(5.3, 4), y = new ComplexNumber(2.3, 5);
+  ComplexNumber res = x.add(y);
+  System.out.println("check operator overloading: " + res.add(3));
 
-		res.printComplex();
-	}
+  res.printComplex();
+ }
 }
 ```
 
-### 5.2 Functional Overriding (Runtime polymorhism):
+### 5.2 Functional Overriding (Runtime polymorhism)
 
+Each layer of inheritance allows us to override methods from the parent class to provide more specific behavior.
+
+``` java
+class Animal {
+    void sound() {
+        System.out.println("The animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("The dog barks");
+    }
+}
+
+class Labrador extends Dog {
+    @Override
+    void sound() {
+        System.out.println("The Labrador barks loudly");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();      // Create an Animal object
+        Animal myDog = new Dog();            // Create a Dog object (but refer to it as an Animal)
+        Animal myLabrador = new Labrador();  // Create a Labrador object (but refer to it as an Animal)
+
+        myAnimal.sound();   // Outputs: The animal makes a sound
+        myDog.sound();      // Outputs: The dog barks
+        myLabrador.sound(); // Outputs: The Labrador barks loudly
+    }
+}
+
+
+```
+
+**More  Example**
+<details>
+  <summary><span style="color: brown; font-weight: bold">Click to expand/collapse.</span></summary>
+
+  ## Generic Java Example on Functional Overloading
 In Java, method overriding is commonly used in collections, especially with classes like List and ArrayList. The List interface defines a set of methods that any list-type class must implement, and ArrayList is one of the most commonly used implementations of the List interface.
 
 ```java
@@ -415,7 +461,11 @@ public class Main {
 
 ```
 
-## 6. Class Relations:
+</details>
+
+
+
+## 6. Class Relations
 
 Class Relationships: In object-oriented programming (OOP), classes can have various types of relationships that define how they interact with each other. Understanding these relationships is crucial for designing systems that are maintainable, scalable, and intuitive. Here are the key types of relationships among classes:
 
@@ -601,7 +651,7 @@ class Bike extends Vehicle {
 
 ```
 
-#### Summary of Relationships:
+#### Summary of Relationships
 
 - **Inheritance (Is-A):** A subclass inherits from a superclass.
 - **Association (Has-A):** A class is associated with another class.
@@ -642,7 +692,96 @@ class Bike extends Vehicle {
 
 - This is a common design principle that encourages developers to use association (composition/aggregation) to combine behaviors rather than relying on inheritance. This leads to more flexible and dynamic designs.
 
-## Clean Coding:
+
+**Example:** Imagine you are designing a system for a library. You have classes for Book and Library.
+
+**Using Inheritance:**
+If you use inheritance, you might create a structure like this:
+
+```
+class LibraryBook extends Book {
+    private Library library;
+
+    // Other attributes and methods
+}
+
+```
+In this case, LibraryBook is a Book and also directly inherits from it. This can be problematic because LibraryBook now inherits all characteristics of Book, even those that might not be relevant to a library context. It also creates a strong dependency on the Book class.
+
+**Using Association:** Instead, using association, you can design it like this:
+
+```java
+class Book {
+    private String title;
+    private String author;
+
+    // Constructor, getters, setters
+}
+
+class Library {
+    private List<Book> books;
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    // Other attributes and methods
+}
+
+```
+
+```java 
+import java.util.ArrayList;
+import java.util.List;
+
+// Book class
+class Book {
+    private String title;
+    private String author;
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    // Getters and setters
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+}
+
+// Library class
+class Library {
+    private List<Book> books = new ArrayList<>();
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void listBooks() {
+        for (Book book : books) {
+            System.out.println(book.getTitle() + " by " + book.getAuthor());
+        }
+    }
+}
+
+// Main class to test association
+public class Main {
+    public static void main(String[] args) {
+        Library myLibrary = new Library();
+        Book book1 = new Book("1984", "George Orwell");
+        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee");
+
+        myLibrary.addBook(book1);
+        myLibrary.addBook(book2);
+
+        myLibrary.listBooks();
+    }
+}
+
+
+```
+
+## Clean Coding
 
 ### Clean Code Notes
 
@@ -907,7 +1046,7 @@ Shorter names are generally better than longer ones, so long as they are clear. 
 
 Functions are the first line of organization in any topic.
 
-### Small!!
+### Small
 
 The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that.
 
