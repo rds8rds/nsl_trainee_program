@@ -23,7 +23,7 @@ It defines the structure and behavior that the objects will have.
   - Methods: Perform actions on the object's data or define the object’s behavior (e.g., myCar.startEngine()).
 
 
-# Four Pillers of OOP
+### Four Pillers of OOP
 
 - Abstraction
 - Encapsulation
@@ -35,9 +35,14 @@ It defines the structure and behavior that the objects will have.
 **Abstraction** is idea of hiding complex details of a class to its end user; A user might not need to know all the details of a class to use it; We can achieve this by using abstract class and interface some example:
 
 **Focus:** Abstraction emphasizes "what" an object does rather than "how" it does it.
+
 **Implementation:** There are two primary ways to achieve abstraction in Java:
-**Abstract Classes:** Classes that cannot be instantiated on their own and may contain abstract methods (methods without a body).
-**Interfaces:** Fully abstract types that can only contain abstract methods and final, static constants.
+
+- **Abstract Classes:** Classes that cannot be instantiated on their own and **may contain** abstract methods (methods without a body).
+
+- **Interfaces:** Fully abstract types that can only contain abstract methods and final, static constants.
+
+**Example:**
 
 ```java
 
@@ -139,9 +144,22 @@ class Duck implements Animal, Swimmable {
 
 ```
 
-#### Encapsulation
+## Encapsulation
 
-The idea of encapsulting all the related things of a class to its scope, Encapsulation makes the code more organized.
+The idea of encapsulting all the related things of a class to its scope.
+It involves bundling the data (attributes) and methods (functions) into a single unit, typically a class. It restricts direct access to some of the object's components.
+
+**Achieving Encapsulation in Java**
+- **i. Declare Variables as Private**: Make the data members (variables) of the class private to restrict direct access from outside the class.
+
+- **ii. Provide Public Getters and Setters**: Define public methods (getters and setters) to access and update the private variables. This allows controlled access to the data.
+
+
+**Advantages of Encapsulation:**
+
+- **Control Over Data:** You can add logic to setter methods to validate data before setting it, ensuring that only valid data is stored.
+
+- **Data Hiding:** By making data members private, you hide the internal state of the object from the outside world, protecting it from unintended interference.
 
 **Related Topic:** Class Composition, Class Aggregation
 
@@ -183,7 +201,7 @@ class Guitarist{
 
 ```
 
-##### Access Specifier:
+### Access Specifier:
 
 How the class variables and methods can be accessed from its instances, or from its child instances or outside of this class;
 
@@ -194,7 +212,7 @@ How the class variables and methods can be accessed from its instances, or from 
 | `protected`             | ✅    | ✅      | ✅       | ❌    |
 | `public`                | ✅    | ✅      | ✅       | ✅    |
 
-#### Inheritance
+## Inheritance
 
 Sub class is alowed to inherit properties from its base class, [creating new sub class based on base class]
 
@@ -230,7 +248,7 @@ public class Main {
 
 ```
 
-##### Interface based Inheritance:
+### Interface based Inheritance:
 
 What is an Interface :
 
@@ -277,7 +295,7 @@ class Dog implements Animal, Mammal{
 
 ```
 
-#### Polymorphism
+## Polymorphism
 
 The main idea behind polymorphism is that a single function or method can work in different ways depending on the object it is acting upon.
 
@@ -288,7 +306,7 @@ The main idea behind polymorphism is that a single function or method can work i
 - Runtime Polymorphism
   - Function Overriding
 
-##### Functional overloading example: (compiletime polymorphism)
+### Functional overloading example: (compiletime polymorphism)
 
 ```java
 // functional overloading
@@ -324,7 +342,7 @@ class ComplexNumber{
 }
 ```
 
-##### Functional Overriding (Runtime polymorhism):
+### Functional Overriding (Runtime polymorhism):
 
 In Java, method overriding is commonly used in collections, especially with classes like List and ArrayList. The List interface defines a set of methods that any list-type class must implement, and ArrayList is one of the most commonly used implementations of the List interface.
 
@@ -396,7 +414,7 @@ public class Main {
 
 ```
 
-### Class Relations:
+## Class Relations:
 
 Class Relationships: In object-oriented programming (OOP), classes can have various types of relationships that define how they interact with each other. Understanding these relationships is crucial for designing systems that are maintainable, scalable, and intuitive. Here are the key types of relationships among classes:
 
@@ -408,7 +426,7 @@ Class Relationships:
   - Compostition [ Strong Has - A ]
 - Dependency - Realization
 
-#### 1. Inheritance (Is-A Relationship)
+### 1. Inheritance (Is-A Relationship)
 
 Inheritance is a relationship where one class (the subclass or derived class) inherits the properties and behaviors (fields and methods) of another class (the superclass or base class). This is often described as an "is-a" relationship.
 
@@ -439,11 +457,11 @@ public class Main {
 
 ```
 
-#### 2. Association (Has-A Relationship)
+### 2. Association (Has-A Relationship)
 
 Association is a relationship where one class uses or is associated with another class. This can be further broken down into aggregation and composition.
 
-##### 2.1 Aggregation (Weak Has-A Relationship)
+#### 2.1 Aggregation (Weak Has-A Relationship)
 
 Aggregation is a form of association where one class contains a reference to another class, but the contained object can exist independently of the container.
 
@@ -480,7 +498,7 @@ class Library {
 
 ```
 
-##### 2.2 Composition (Strong Has-A Relationship)
+#### 2.2 Composition (Strong Has-A Relationship)
 
 Composition is a form of association where one class is composed of other classes. The composed objects cannot exist independently of the container.
 
@@ -515,7 +533,7 @@ class Car {
 
 ```
 
-#### 3. Dependency (Uses-A Relationship)
+### 3. Dependency (Uses-A Relationship)
 
 Dependency is a relationship where one class depends on another class. This relationship is often described as a "uses-a" relationship. The dependent class needs the other class to function, typically by calling its methods or using its data.
 
@@ -538,7 +556,7 @@ class Driver {
 
 ```
 
-#### 4. Realization (Implements Relationship)
+### 4. Realization (Implements Relationship)
 
 ```java
 interface Flyable {
@@ -553,7 +571,7 @@ class Bird implements Flyable {
 
 ```
 
-#### 5. Generalization
+### 5. Generalization
 
 Generalization is a relationship where a general concept or class is defined, and other classes inherit from this general class. This is closely related to inheritance but focuses on the abstraction aspect, where the superclass is a generalized form of the subclasses.
 
@@ -592,7 +610,7 @@ class Bike extends Vehicle {
 - **Realization (Implements):** A class implements an interface.
 - **Generalization:** A general concept or class is inherited by more specific
 
-### Why Association is always preferred over Aggregation ?
+### Why Association is preferred over Aggregation ?
 
 1. **Flexibility**:
 
