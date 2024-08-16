@@ -144,7 +144,7 @@ class Duck implements Animal, Swimmable {
 
 ```
 
-## Encapsulation
+## 3. Encapsulation
 
 The idea of encapsulting all the related things of a class to its scope.
 It involves bundling the data (attributes) and methods (functions) into a single unit, typically a class. It restricts direct access to some of the object's components.
@@ -201,7 +201,7 @@ class Guitarist{
 
 ```
 
-### Access Specifier:
+### 3.1 Access Specifier:
 
 How the class variables and methods can be accessed from its instances, or from its child instances or outside of this class;
 
@@ -212,7 +212,7 @@ How the class variables and methods can be accessed from its instances, or from 
 | `protected`             | ✅    | ✅      | ✅       | ❌    |
 | `public`                | ✅    | ✅      | ✅       | ✅    |
 
-## Inheritance
+## 4. Inheritance
 
 Sub class is alowed to inherit properties from its base class, [creating new sub class based on base class]
 
@@ -248,7 +248,7 @@ public class Main {
 
 ```
 
-### Interface based Inheritance:
+### 4.1 Interface based Inheritance:
 
 What is an Interface :
 
@@ -295,7 +295,7 @@ class Dog implements Animal, Mammal{
 
 ```
 
-## Polymorphism
+## 5. Polymorphism
 
 The main idea behind polymorphism is that a single function or method can work in different ways depending on the object it is acting upon.
 
@@ -306,7 +306,8 @@ The main idea behind polymorphism is that a single function or method can work i
 - Runtime Polymorphism
   - Function Overriding
 
-### Functional overloading example: (compiletime polymorphism)
+### 5. 1 Functional overloading example: (compiletime polymorphism)
+With method overloading, multiple methods can have the same name with different parameters:
 
 ```java
 // functional overloading
@@ -342,7 +343,7 @@ class ComplexNumber{
 }
 ```
 
-### Functional Overriding (Runtime polymorhism):
+### 5.2 Functional Overriding (Runtime polymorhism):
 
 In Java, method overriding is commonly used in collections, especially with classes like List and ArrayList. The List interface defines a set of methods that any list-type class must implement, and ArrayList is one of the most commonly used implementations of the List interface.
 
@@ -414,7 +415,7 @@ public class Main {
 
 ```
 
-## Class Relations:
+## 6. Class Relations:
 
 Class Relationships: In object-oriented programming (OOP), classes can have various types of relationships that define how they interact with each other. Understanding these relationships is crucial for designing systems that are maintainable, scalable, and intuitive. Here are the key types of relationships among classes:
 
@@ -426,7 +427,7 @@ Class Relationships:
   - Compostition [ Strong Has - A ]
 - Dependency - Realization
 
-### 1. Inheritance (Is-A Relationship)
+### 6.1 Inheritance (Is-A Relationship)
 
 Inheritance is a relationship where one class (the subclass or derived class) inherits the properties and behaviors (fields and methods) of another class (the superclass or base class). This is often described as an "is-a" relationship.
 
@@ -457,11 +458,11 @@ public class Main {
 
 ```
 
-### 2. Association (Has-A Relationship)
+### 6.2 Association (Has-A Relationship)
 
 Association is a relationship where one class uses or is associated with another class. This can be further broken down into aggregation and composition.
 
-#### 2.1 Aggregation (Weak Has-A Relationship)
+#### 6.2.1 Aggregation (Weak Has-A Relationship)
 
 Aggregation is a form of association where one class contains a reference to another class, but the contained object can exist independently of the container.
 
@@ -498,7 +499,7 @@ class Library {
 
 ```
 
-#### 2.2 Composition (Strong Has-A Relationship)
+#### 6.2.2 Composition (Strong Has-A Relationship)
 
 Composition is a form of association where one class is composed of other classes. The composed objects cannot exist independently of the container.
 
@@ -533,7 +534,7 @@ class Car {
 
 ```
 
-### 3. Dependency (Uses-A Relationship)
+### 6.3. Dependency (Uses-A Relationship)
 
 Dependency is a relationship where one class depends on another class. This relationship is often described as a "uses-a" relationship. The dependent class needs the other class to function, typically by calling its methods or using its data.
 
@@ -556,7 +557,7 @@ class Driver {
 
 ```
 
-### 4. Realization (Implements Relationship)
+### 6.4. Realization (Implements Relationship)
 
 ```java
 interface Flyable {
@@ -571,7 +572,7 @@ class Bird implements Flyable {
 
 ```
 
-### 5. Generalization
+### 6.5. Generalization
 
 Generalization is a relationship where a general concept or class is defined, and other classes inherit from this general class. This is closely related to inheritance but focuses on the abstraction aspect, where the superclass is a generalized form of the subclasses.
 
