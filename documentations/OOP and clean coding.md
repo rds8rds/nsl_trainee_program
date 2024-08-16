@@ -1,7 +1,7 @@
 ## OOP topics (Java Based):
 
 
-![Four Pillars](https://github.com/rds8rds/nsl_trainee_program/tree/main/images/OOP%20and%20clean%20coding/OOPS-Concept-four-Pillars-by-datavaani.png)
+![Four Pillars](https://github.com/rds8rds/nsl_trainee_program/raw/main/images/OOP%20and%20clean%20coding/OOPS-Concept-four-Pillars-by-datavaani.png)
 
 ### Four Pillers of OOP
 
