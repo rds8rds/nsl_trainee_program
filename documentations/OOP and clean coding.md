@@ -1,20 +1,43 @@
-## OOP topics (Java Based):
+# Object Oriented programming
+
+Object-Oriented Programming (OOP) is a programming paradigm where "objects" contain both data (attributes) and code (methods). It organizes code into modular units and promotes reuse through inheritance.
 
 
-![Four Pillars](https://github.com/rds8rds/nsl_trainee_program/raw/main/images/OOP%20and%20clean%20coding/OOPS-Concept-four-Pillars-by-datavaani.png)
+## 1. Class and Objects: 
 
-### Four Pillers of OOP
+### 1.1 Class: 
+A class is a blueprint or prototype from which objects are created.
+It defines the structure and behavior that the objects will have.
+
+- **Components:**
+  - **Attributes:** Define the properties or state of the class (e.g., brand, model, year).
+  - **Methods:** Define the behaviors or actions that objects of the class can perform (e.g., startEngine()).
+
+### 1.2 Object: 
+
+- An object is an instance of a class.
+- It represents a concrete entity with state and behavior.
+- Memory is allocated for an object when it is instantiated from a class.
+- Attributes and Methods:
+  - Attributes: Store the current state or values of the object (e.g., myCar.brand, myCar.model).
+  - Methods: Perform actions on the object's data or define the object’s behavior (e.g., myCar.startEngine()).
+
+
+# Four Pillers of OOP
 
 - Abstraction
 - Encapsulation
 - Inheritance
 - Polymorphism
 
-#### Abstraction
+## 2. Abstraction
 
 **Abstraction** is idea of hiding complex details of a class to its end user; A user might not need to know all the details of a class to use it; We can achieve this by using abstract class and interface some example:
 
-_Note_ : java doesn't allow multiple inheritance, but allows multilevel inheritance; [famous issue: Diamond problem ]
+**Focus:** Abstraction emphasizes "what" an object does rather than "how" it does it.
+**Implementation:** There are two primary ways to achieve abstraction in Java:
+**Abstract Classes:** Classes that cannot be instantiated on their own and may contain abstract methods (methods without a body).
+**Interfaces:** Fully abstract types that can only contain abstract methods and final, static constants.
 
 ```java
 
@@ -119,7 +142,8 @@ class Duck implements Animal, Swimmable {
 #### Encapsulation
 
 The idea of encapsulting all the related things of a class to its scope, Encapsulation makes the code more organized.
-Related Topic: Class Composition, Class Aggregation
+
+**Related Topic:** Class Composition, Class Aggregation
 
 ```java
 
@@ -161,7 +185,7 @@ class Guitarist{
 
 ##### Access Specifier:
 
-How the class variables and methods can be accessed from its instance, or from its child instance or outside of this class;
+How the class variables and methods can be accessed from its instances, or from its child instances or outside of this class;
 
 | Access Specifier        | Class | Package | Subclass | World |
 | ----------------------- | ----- | ------- | -------- | ----- |
