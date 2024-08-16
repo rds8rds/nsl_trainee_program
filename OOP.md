@@ -9,9 +9,9 @@
 
 #### Abstraction
 
-Abstraction is idea of hiding complex details of a class to its end user; A user might not need to know all the details of a class to use it; We can achieve this by using abstract class and interface some example:
+**Abstraction** is idea of hiding complex details of a class to its end user; A user might not need to know all the details of a class to use it; We can achieve this by using abstract class and interface some example:
 
-note : java doesn't allow multiple inheritance, but allows multilevel inheritance; [famous issue: Diamond problem ]
+_Note_ : java doesn't allow multiple inheritance, but allows multilevel inheritance; [famous issue: Diamond problem ]
 
 ```java
 
@@ -116,7 +116,7 @@ class Duck implements Animal, Swimmable {
 #### Encapsulation
 
 The idea of encapsulting all the related things of a class to its scope, Encapsulation makes the code more organized.
-Related Topic: Class Composition
+Related Topic: Class Composition, Class Aggregation
 
 ```java
 
@@ -158,7 +158,7 @@ class Guitarist{
 
 ##### Access Specifier:
 
-how the class variables and methods can be accessed from its instance, or from its child instance or outside of this class;
+How the class variables and methods can be accessed from its instance, or from its child instance or outside of this class;
 
 | Access Specifier        | Class | Package | Subclass | World |
 | ----------------------- | ----- | ------- | -------- | ----- |
@@ -251,6 +251,8 @@ class Dog implements Animal, Mammal{
 ```
 
 #### Polymorphism
+
+The main idea behind polymorphism is that a single function or method can work in different ways depending on the object it is acting upon.
 
 - Polymorphism
 - Compiletime Polymorphism
@@ -371,7 +373,13 @@ public class Main {
 
 Class Relationships: In object-oriented programming (OOP), classes can have various types of relationships that define how they interact with each other. Understanding these relationships is crucial for designing systems that are maintainable, scalable, and intuitive. Here are the key types of relationships among classes:
 
-Class Relationships: - Inheritance (Is - a) - Association (Has - A) - Aggregation [ Weak Has - A ] - Compostition [ Strong Has - A ] - Dependency - Realization
+Class Relationships:
+
+- Inheritance (Is - a)
+- Association (Has - A)
+  - Aggregation [ Weak Has - A ]
+  - Compostition [ Strong Has - A ]
+- Dependency - Realization
 
 #### 1. Inheritance (Is-A Relationship)
 
