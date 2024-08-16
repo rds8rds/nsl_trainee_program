@@ -693,12 +693,12 @@ class Bike extends Vehicle {
 - This is a common design principle that encourages developers to use association (composition/aggregation) to combine behaviors rather than relying on inheritance. This leads to more flexible and dynamic designs.
 
 
-**Example:** Imagine you are designing a system for a library. You have classes for Book and Library.
+>**Example:** Imagine you are designing a system for a library. You have classes for Book and Library.
 
 **Using Inheritance:**
 If you use inheritance, you might create a structure like this:
 
-```
+``` java
 class LibraryBook extends Book {
     private Library library;
 
@@ -730,7 +730,16 @@ class Library {
 
 ```
 
-```java 
+#### Advantages of Association
+**Flexibility**: In the association approach, the Library class doesn't need to be a specialized form of Book. This decouples Library from Book, allowing you to make changes to Book without affecting Library.
+
+**Encapsulation**: Library maintains a list of Book objects and interacts with them through methods like addBook(). This encapsulation hides the implementation details of how books are stored and managed.
+
+**Reduced Coupling**: With association, Library and Book can evolve independently. You can add new types of books or change the way books are managed in the library without altering the Book class.
+
+Here's a complete example of using association in Java:
+
+```java
 import java.util.ArrayList;
 import java.util.List;
 
