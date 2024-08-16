@@ -1,6 +1,6 @@
 ## OOP topics (Java Based):
 
-### Four Pillers of OPP
+### Four Pillers of OOP
 
 - Abstraction
 - Encapsulation
