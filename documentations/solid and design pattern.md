@@ -6,7 +6,7 @@ The following **five** concepts make up our SOLID principles:
 
 ### Table of contents
 
-1. [Single Responsibility](#1.1-Single-Responsiblity:)
+1. [Single Responsibility](#-1.1-single-responsiblity)
 2. [Open/Closed Principle ](#ocp)
 3. [Liskov Substitution Principle](#lsp)
 4. [Interface Segregation Principle](#isp)
@@ -15,7 +15,7 @@ The following **five** concepts make up our SOLID principles:
 
 
 
-## 1.1 Single Responsiblity:
+## 1.1 Single Responsiblity
 [Back to Table of Contents](#Table-of-contents)
 
 > a class should only have one responsibility. Furthermore, it should only have one reason to change.
@@ -92,7 +92,7 @@ public class ReportSaver {
 
 ```
 <a name = "ocp">
-<h2> 1.2 Open for Extention Closed for Modification: </h2>
+## 1.2 Open for Extention Closed for Modification: 
 </a>
 
 
