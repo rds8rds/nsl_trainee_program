@@ -7,10 +7,10 @@ The following **five** concepts make up our SOLID principles:
 ### Table of contents
 
 1. [Single Responsibility](#-1.1-single-responsiblity)
-2. [Open/Closed Principle ](#-1.3-liskov-substitution-principle)
-3. [Liskov Substitution Principle](#lsp)
-4. [Interface Segregation Principle](#isp)
-5. [Dependency Inversion Principle](#dip)
+2. [Open/Closed Principle ](#-1.2-open-for-extention-closed-for-modification)
+3. [Liskov Substitution Principle](#-1.3-liskov-substitution-principle)
+4. [Interface Segregation Principle](#-1.4-interface-segregation-principle)
+5. [Dependency Inversion Principle](#-1.5-dependency-inversion-principle--DIP-)
 
 
 
@@ -91,9 +91,7 @@ public class ReportSaver {
 }
 
 ```
-<a name = "ocp">
-## 1.2 Open for Extention Closed for Modification: 
-</a>
+## 1.2 Open for Extention Closed for Modification
 
 
 > Simply put, classes should be open for extension but closed for modification. 
