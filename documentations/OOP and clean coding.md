@@ -790,7 +790,7 @@ public class Main {
 
 ```
 
-## Clean Coding
+# Clean Coding
 
 ### Clean Code Notes
 
