@@ -6,11 +6,11 @@ The following **five** concepts make up our SOLID principles:
 
 ### Table of contents
 
-1. [Single Responsibility](#-1.1-single-responsiblity)
-2. [Open/Closed Principle ](#-1.2-open-for-extention-closed-for-modification)
-3. [Liskov Substitution Principle](#-1.3-liskov-substitution-principle)
-4. [Interface Segregation Principle](#-1.4-interface-segregation-principle)
-5. [Dependency Inversion Principle](#-1.5-dependency-inversion-principle--DIP-)
+1. [Single Responsibility](#11-single-responsibility)
+2. [Open/Closed Principle](#12-open-for-extension-closed-for-modification)
+3. [Liskov Substitution Principle](#13-liskov-substitution-principle)
+4. [Interface Segregation Principle](#14-interface-segregation-principle)
+5. [Dependency Inversion Principle](#15-dependency-inversion-principle)
 
 
 
