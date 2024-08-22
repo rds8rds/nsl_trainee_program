@@ -4,13 +4,19 @@ Design principles encourage us to create more maintainable, understandable, and 
 
 The following **five** concepts make up our SOLID principles:
 
-1. Single Responsibility
-2. Open/Closed
-3. Liskov Substitution
-4. Interface Segregation
-5. Dependency Inversion
+### Table of contents
 
-## 1.1 Single Responsiblity: 
+1. [Single Responsibility](#1.1-Single-Responsiblity:)
+2. [Open/Closed Principle ](#ocp)
+3. [Liskov Substitution Principle](#lsp)
+4. [Interface Segregation Principle](#isp)
+5. [Dependency Inversion Principle](#dip)
+
+
+
+
+## 1.1 Single Responsiblity:
+[Back to Table of Contents](#Table-of-contents)
 
 > a class should only have one responsibility. Furthermore, it should only have one reason to change.
 
@@ -85,8 +91,10 @@ public class ReportSaver {
 }
 
 ```
+<a name = "ocp">
+<h2> 1.2 Open for Extention Closed for Modification: </h2>
+</a>
 
-## 1.2 Open for Extention Closed for Modification: 
 
 > Simply put, classes should be open for extension but closed for modification. 
 
@@ -196,6 +204,7 @@ class Triangle extends Shape {
 ```
 
 ## 1.3 Liskov Substitution Principle: 
+[Back to Table of Contents](#Table-of-contents)
 
 > "Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program."
 
