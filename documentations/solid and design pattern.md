@@ -15,8 +15,8 @@ The following **five** concepts make up our SOLID principles:
 
 
 
-## 1.1 Single Responsiblity
-[Back to Table of Contents](#Table-of-contents)
+## 1.1 Single Responsibility
+[⬆️Back To Top](#table-of-contents)
 
 > a class should only have one responsibility. Furthermore, it should only have one reason to change.
 
@@ -91,8 +91,8 @@ public class ReportSaver {
 }
 
 ```
-## 1.2 Open for Extention Closed for Modification
-
+## 1.2 Open for Extension Closed for Modification
+[⬆️Back To Top](#table-of-contents)
 
 > Simply put, classes should be open for extension but closed for modification. 
 
@@ -202,7 +202,7 @@ class Triangle extends Shape {
 ```
 
 ## 1.3 Liskov Substitution Principle
-[Back to Table of Contents](#Table-of-contents)
+[⬆️Back To Top](#table-of-contents)
 
 > "Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program."
 
@@ -328,6 +328,7 @@ Now, each shape maintains its own integrity without violating LSP.
 
 
 ## 1.4 Interface Segregation Principle
+[⬆️Back To Top](#table-of-contents)
 It states that “do not force any client to implement an interface which is irrelevant to them“. Here main goal is to focus on avoiding fat interface and give preference to many small client-specific interfaces. 
 
 > Larger interfaces should be split into smaller ones. 
@@ -340,7 +341,91 @@ By doing so, we can ensure that implementing classes only need to be concerned a
 - Improves Flexibility and Maintainability: 
 - Enhances Reusability
 
-## 1.5 Dependency Inversion Principle (DIP)
+
+### Example
+**Violation of ISP**
+
+```java
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Developer implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Developer is coding.");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Developer is eating.");
+    }
+}
+
+class Robot implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Robot is working.");
+    }
+
+    @Override
+    public void eat() {
+        throw new UnsupportedOperationException("Robot does not eat.");
+    }
+}
+```
+Robot doesn't required to eat but as it implements Worker interface it has to override eat() method; 
+
+**Adherence to ISP**
+```java
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+class Developer implements Workable, Eatable {
+    @Override
+    public void work() {
+        System.out.println("Developer is coding.");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Developer is eating.");
+    }
+}
+
+class Robot implements Workable {
+    @Override
+    public void work() {
+        System.out.println("Robot is working.");
+    }
+}
+```
+
+**Main Function**
+```java
+public class Main {
+    public static void main(String[] args) {
+        Workable developer = new Developer();
+        developer.work();
+
+        Eatable eatableDeveloper = (Eatable) developer;
+        eatableDeveloper.eat();
+
+        Workable robot = new Robot();
+        robot.work();
+    }
+}
+```
+we split the Worker interface to Workable and Eatable and then classes can implement them as they please
+
+## 1.5 Dependency Inversion Principle
+[⬆️Back To Top](#table-of-contents)
 
 > High-level modules should not depend on the low-level module but both should depend on the abstraction. Because the abstraction does not depend on detail but the detail depends on abstraction.
 
@@ -354,6 +439,7 @@ By doing so, we can ensure that implementing classes only need to be concerned a
 
 
 > **Foot Note:**
+[⬆️Back To Top](#table-of-contents)
 <details>
 <summary><span style="color: brown; font-weight: bold">Click to expand/collapse.</span></summary>
 
@@ -628,4 +714,40 @@ public class Main {
 
 - The Application class depends on the Logger interface, making it easy to switch or extend logging mechanisms without modifying the high-level logic
 
+
+
+# 2. Design Pattern
+Design patterns are general, reusable solutions to common problems that arise in software design. They represent best practices and are based on the experiences and insights of skilled software developers. Design patterns provide a standardized approach to solving problems that can be applied across various types of software projects.
+
+
+**Key Aspects of Design Patterns:**
+
+ - Reusability
+ - Common Language
+ - Best Practices
+ - Flexibility
+
+### Types of Design Patterns:
+
+1. Creational Patterns
+    a. Builder
+    b. Factory
+    c. Singleton
+    d. prototype
+
+2. Structural Patterns
+    a. Adapter
+    b. Facade
+    c. Decorator
+    d. Proxy 
+
+3. Behavioral Patterns
+    a. Strategy
+    b. Observer 
+    c. Command
+    d. Chain of Responsiblity 
+
+
+## 2.1 Builder 
+Builder is a creational design pattern, which allows constructing complex objects step by step. Unlike other creational patterns, Builder doesn’t require products to have a common interface. That makes it possible to produce different products using the same construction process.
 
