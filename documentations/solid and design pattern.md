@@ -1236,7 +1236,6 @@ Let’s consider a sorting application where we need to sort a list of integers.
 - Hard-Coded Logic 
   > Implementing sorting logic directly within the main sorting class can make the code rigid and difficult to extend or modify. Making changes to the sorting algorithm becomes cumbersome and error-prone.
 
-// image --> 
 ![Strategy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/strategy-example.png?raw=true)
 
 > How Strategy Pattern helps to solve above challenges :
