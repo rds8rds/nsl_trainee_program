@@ -7,9 +7,18 @@
    4. [Interface Segregation Principle](#14-interface-segregation-principle)
    5. [Dependency Inversion Principle](#15-dependency-inversion-principle)
 2. [Design Pattern:](#2-design-pattern)
-   1. [Builder Pattern](#21-builder)
-   2. [Proxy Pattern](#22-proxy)
-   3. [Strategey Pattern](#23-strategy)
+
+   - Creational Design Patterns
+
+     1. [Builder Pattern](#21-builder)
+
+   - Structural Design Patterns
+
+     1. [Proxy Pattern](#22-proxy)
+
+   - Behavioral Design Patterns
+
+     1. [Strategey Pattern](#23-strategy)
 
 # 1. SOLID Principle
 
@@ -357,6 +366,7 @@ Now, each shape maintains its own integrity without violating LSP.
 ## 1.4 Interface Segregation Principle
 
 [⬆️Back To Top](#table-of-contents)
+
 It states that “do not force any client to implement an interface which is irrelevant to them“. Here main goal is to focus on avoiding fat interface and give preference to many small client-specific interfaces.
 
 > Larger interfaces should be split into smaller ones.
@@ -796,7 +806,9 @@ Design patterns are general, reusable solutions to common problems that arise in
 
 Builder is a _creational_ design pattern, which allows _constructing complex objects_ in a step by step fashion, where the construction process can vary based on the type of product being built. The pattern separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
 
-> Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process.
+> Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process. **[Different Concrete builder to produce different products]**
+
+[example](#builder-more-example)
 
 Components of the Builder Design Pattern
 
@@ -811,7 +823,7 @@ Components of the Builder Design Pattern
 - It may consist of multiple components or parts, and its structure can vary based on the implementation.
 - The Product is typically a class with attributes representing the different parts that the Builder constructs.
 
-**2. Builder** is an interface or an abstract class that declares the construction steps for building a complex object.
+**2. Builder** is an **interface or an abstract class** that declares the construction steps for building a complex object.
 
 - It typically includes methods for constructing individual parts of the product.
 - By defining an interface, the Builder allows for the creation of different concrete builders that can produce variations of the product.
@@ -968,6 +980,141 @@ Storage: 1TB SSD
 - Immutable Objects with final fields
 - Increased Code Complexity
 - Tight Coupling with Product
+
+#### Builder More example
+
+```java
+/*
+** Here is an example where the Builder design pattern is used to create two completely different types of ** products: a Website and a Meal. These products have no common interface, structure, or purpose, yet we ** can still use the Builder pattern to construct them.
+**
+*/
+
+// Product: Website
+class Website {
+    private String homepage;
+    private String aboutPage;
+    private String contactPage;
+
+    // Setters
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
+
+    public void setAboutPage(String aboutPage) {
+        this.aboutPage = aboutPage;
+    }
+
+    public void setContactPage(String contactPage) {
+        this.contactPage = contactPage;
+    }
+
+    @Override
+    public String toString() {
+        return "Website [Homepage=" + homepage + ", About Page=" + aboutPage + ", Contact Page=" + contactPage + "]";
+    }
+}
+
+// Concrete Builder for Website
+class WebsiteBuilder {
+    private Website website = new Website();
+
+    public void buildHomepage() {
+        website.setHomepage("Homepage Content");
+    }
+
+    public void buildAboutPage() {
+        website.setAboutPage("About Us Content");
+    }
+
+    public void buildContactPage() {
+        website.setContactPage("Contact Us Content");
+    }
+
+    public Website getWebsite() {
+        return website; // Returning the built website
+    }
+}
+
+// Product: Meal
+class Meal {
+    private String mainItem;
+    private String drink;
+    private String dessert;
+
+    // Setters
+    public void setMainItem(String mainItem) {
+        this.mainItem = mainItem;
+    }
+
+    public void setDrink(String drink) {
+        this.drink = drink;
+    }
+
+    public void setDessert(String dessert) {
+        this.dessert = dessert;
+    }
+
+    @Override
+    public String toString() {
+        return "Meal [Main Item=" + mainItem + ", Drink=" + drink + ", Dessert=" + dessert + "]";
+    }
+}
+
+// Concrete Builder for Meal
+class MealBuilder {
+    private Meal meal = new Meal();
+
+    public void buildMainItem() {
+        meal.setMainItem("Burger");
+    }
+
+    public void buildDrink() {
+        meal.setDrink("Coke");
+    }
+
+    public void buildDessert() {
+        meal.setDessert("Ice Cream");
+    }
+
+    public Meal getMeal() {
+        return meal; // Returning the built meal
+    }
+}
+
+// Director Class
+class Director {
+    public void constructWebsite(WebsiteBuilder builder) {
+        builder.buildHomepage();
+        builder.buildAboutPage();
+        builder.buildContactPage();
+    }
+
+    public void constructMeal(MealBuilder builder) {
+        builder.buildMainItem();
+        builder.buildDrink();
+        builder.buildDessert();
+    }
+}
+
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        Director director = new Director();
+
+        // Building a Website
+        WebsiteBuilder websiteBuilder = new WebsiteBuilder();
+        director.constructWebsite(websiteBuilder);
+        Website website = websiteBuilder.getWebsite();
+        System.out.println(website);
+
+        // Building a Meal
+        MealBuilder mealBuilder = new MealBuilder();
+        director.constructMeal(mealBuilder);
+        Meal meal = mealBuilder.getMeal();
+        System.out.println(meal);
+    }
+}
+```
 
 ## 2.2 Proxy
 
