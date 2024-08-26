@@ -796,8 +796,7 @@ You are tasked with implementing a system for building custom computers. Each co
 
 Implement the Builder design pattern to achieve this, allowing the construction of computers through a step-by-step process. Use the provided components – Product (Computer), Builder interface, ConcreteBuilder (GamingComputerBuilder), Director, and Client
 
-// imge --> 
-![builder example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/builder-example.png?raw=true)
+![Builder example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/builder-example.png?raw=true)
 
 1. Product (Computer):
 
@@ -960,7 +959,7 @@ The Proxy acts as a surrogate or placeholder for the RealSubject. It controls ac
 
 Consider a scenario where your application needs to load and display images, and you want to optimize the image loading process. Loading images from disk or other external sources can be resource-intensive, especially if the images are large or stored remotely.
 
-// images ---> 
+![Proxy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/proxy-example.png?raw=true)
 
 > `1. Subject (Image Interface):`
 
@@ -1238,6 +1237,7 @@ Let’s consider a sorting application where we need to sort a list of integers.
   > Implementing sorting logic directly within the main sorting class can make the code rigid and difficult to extend or modify. Making changes to the sorting algorithm becomes cumbersome and error-prone.
 
 // image --> 
+![Strategy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/strategy-example.png?raw=true)
 
 > How Strategy Pattern helps to solve above challenges :
 
