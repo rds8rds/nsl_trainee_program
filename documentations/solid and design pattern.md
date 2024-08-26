@@ -1,10 +1,21 @@
-# 1. SOLID Principle  
+# Table of contents
+
+1. [SOLID Principle:](#1-solid-principle)
+   1. [Single Responsibility](#11-single-responsibility)
+   2. [Open/Closed Principle](#12-open-for-extension-closed-for-modification)
+   3. [Liskov Substitution Principle](#13-liskov-substitution-principle)
+   4. [Interface Segregation Principle](#14-interface-segregation-principle)
+   5. [Dependency Inversion Principle](#15-dependency-inversion-principle)
+2. [Design Pattern:](#2-design-pattern)
+   1. [Builder Pattern](#21-builder)
+   2. [Proxy Pattern](#22-proxy)
+   3. [Strategey Pattern](#23-strategy)
+
+# 1. SOLID Principle
 
 Design principles encourage us to create more maintainable, understandable, and flexible software. Consequently, as our applications grow in size, we can reduce their complexity and save ourselves a lot of headaches further down the road!
 
 The following **five** concepts make up our SOLID principles:
-
-### Table of contents
 
 1. [Single Responsibility](#11-single-responsibility)
 2. [Open/Closed Principle](#12-open-for-extension-closed-for-modification)
@@ -12,22 +23,21 @@ The following **five** concepts make up our SOLID principles:
 4. [Interface Segregation Principle](#14-interface-segregation-principle)
 5. [Dependency Inversion Principle](#15-dependency-inversion-principle)
 
-
-
-
 ## 1.1 Single Responsibility
+
 [⬆️Back To Top](#table-of-contents)
 
 > a class should only have one responsibility. Furthermore, it should only have one reason to change.
 
 **Benifits:**
+
 - Less Coupling
-- Less Testing 
-- Organization 
+- Less Testing
+- Organization
 
+### **Example: 1** Violation of SRP;
 
-### **Example: 1** Violation of SRP; 
-``` java
+```java
 public class Report {
     private String content;
 
@@ -52,11 +62,14 @@ public class Report {
     }
 }
 ```
+
 **Problems:**
+
 - The Report class has multiple responsibilities: generating, printing, and saving the report.
 - If you need to change how the report is saved (e.g., to a database instead of a file), you would need to modify this class, violating SRP.
 
 > **SRP-Compliant Design**
+
 ```java
 public class Report {
     private String content;
@@ -91,10 +104,12 @@ public class ReportSaver {
 }
 
 ```
+
 ## 1.2 Open for Extension Closed for Modification
+
 [⬆️Back To Top](#table-of-contents)
 
-> Simply put, classes should be open for extension but closed for modification. 
+> Simply put, classes should be open for extension but closed for modification.
 
 In doing so, we stop ourselves from modifying existing code and causing potential new bugs in an otherwise happy application.
 
@@ -102,16 +117,18 @@ Of course, the **one exception to the rule is when fixing bugs in existing code.
 
 **Benefits:**
 
-- Class hierarchy remains untouched, 
-- ensuring stability and reduce risk of bugs 
+- Class hierarchy remains untouched,
+- ensuring stability and reduce risk of bugs
 
 ### **Example:** Violation of OCP
+
 Here’s an example where the **Shape class** violates the Open/Closed Principle:
+
 ```java
 public class Shape {
-    // no extention 
+    // no extention
     public double calculateArea(Object shape) {
-        // checking instance type 
+        // checking instance type
         if (shape instanceof Circle) {
             Circle circle = (Circle) shape;
             return Math.PI * circle.radius * circle.radius;
@@ -142,13 +159,16 @@ class Rectangle {
 }
 
 ```
+
 **Problems:**
+
 - To add a new shape, like a Triangle, you need to modify the Shape class by adding more if or else if conditions.
 - This violates the Open/Closed Principle because the class is not closed for modification.
 
 **OCP-Compliant Design:**
 
 Now, let’s refactor the code to comply with the Open/Closed Principle:
+
 ```java
 abstract class Shape {
     abstract double calculateArea();
@@ -182,7 +202,9 @@ class Rectangle extends Shape {
     }
 }
 ```
+
 **Adding new shape Triangle**
+
 ```java
 class Triangle extends Shape {
     private double base;
@@ -202,22 +224,24 @@ class Triangle extends Shape {
 ```
 
 ## 1.3 Liskov Substitution Principle
+
 [⬆️Back To Top](#table-of-contents)
 
 > "Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program."
 
 In simpler terms, this means that if you have a class B that extends class A, you should be able to replace A with B without introducing bugs or unexpected behavior. The subclass B should honor the contract established by the superclass A.
 
-**Key Points:** 
+**Key Points:**
+
 1. Substitutablity
 2. Behabioral Consistency
 3. No Strengthened Preconditions
-4. No Weakened Postconditions 
+4. No Weakened Postconditions
 
 **Example:**
 Let’s consider a basic example with a Rectangle class and a subclass Square.
 
-``` java
+```java
 // Superclass
 class Rectangle {
     protected int width;
@@ -252,6 +276,7 @@ class Square extends Rectangle {
 }
 
 ```
+
 In this case:
 
 - The Square class overrides the setWidth and setHeight methods to ensure that the width and height are always equal, maintaining the square’s properties.
@@ -259,7 +284,7 @@ In this case:
 
 **Problem Demonstration:**
 
-``` java
+```java
 public class Main {
     public static void main(String[] args) {
         Rectangle rect = new Rectangle();
@@ -274,11 +299,12 @@ public class Main {
     }
 }
 ```
+
 **In this example:**
 
 The Rectangle behaves as expected, but when we replace it with a Square, the result is different. The Square changes the behavior of the getArea() method due to its constraints on width and height being equal. This violates LSP, as the client code expects the behavior of Rectangle but gets the unexpected behavior of Square.
 
-### Example: Correct Use of **LSP**; 
+### Example: Correct Use of **LSP**;
 
 To adhere to LSP, Square should not extend Rectangle if it cannot honor the rectangle’s contract. Instead, you might treat Square and Rectangle as separate classes with a common interface or abstract class.
 
@@ -317,32 +343,35 @@ class Square implements Shape {
 }
 
 ```
+
 **In this correct design:**
 
 Both Rectangle and Square implement the Shape interface, but they are not in a parent-child relationship.
 Now, each shape maintains its own integrity without violating LSP.
 
-### Summary: 
+### Summary:
+
 - Violations of LSP **often occur when a subclass overrides** or extends methods in a way that changes the expected behavior, leading to unexpected results.
 - To adhere to LSP, ensure that subclasses truly represent the superclass and don't introduce changes that break the established contract.
 
-
 ## 1.4 Interface Segregation Principle
-[⬆️Back To Top](#table-of-contents)
-It states that “do not force any client to implement an interface which is irrelevant to them“. Here main goal is to focus on avoiding fat interface and give preference to many small client-specific interfaces. 
 
-> Larger interfaces should be split into smaller ones. 
+[⬆️Back To Top](#table-of-contents)
+It states that “do not force any client to implement an interface which is irrelevant to them“. Here main goal is to focus on avoiding fat interface and give preference to many small client-specific interfaces.
+
+> Larger interfaces should be split into smaller ones.
 
 By doing so, we can ensure that implementing classes only need to be concerned about the methods that are of interest to them.
 
 **Key Points:**
+
 - Avoid "Fat" Interfaces
 - Promotes High Cohsion
-- Improves Flexibility and Maintainability: 
+- Improves Flexibility and Maintainability:
 - Enhances Reusability
 
-
 ### Example
+
 **Violation of ISP**
 
 ```java
@@ -375,9 +404,11 @@ class Robot implements Worker {
     }
 }
 ```
-Robot doesn't required to eat but as it implements Worker interface it has to override eat() method; 
+
+Robot doesn't required to eat but as it implements Worker interface it has to override eat() method;
 
 **Adherence to ISP**
+
 ```java
 interface Workable {
     void work();
@@ -408,6 +439,7 @@ class Robot implements Workable {
 ```
 
 **Main Function**
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -422,120 +454,121 @@ public class Main {
     }
 }
 ```
+
 we split the Worker interface to Workable and Eatable and then classes can implement them as they please
 
 ## 1.5 Dependency Inversion Principle
+
 [⬆️Back To Top](#table-of-contents)
 
 > High-level modules should not depend on the low-level module but both should depend on the abstraction. Because the abstraction does not depend on detail but the detail depends on abstraction.
 
-
 **Key Points:**
+
 - DIP is obtained through **Dependency Injection**
 - **Loose couplig:** By injecting dependencies, classes don’t need to know about the specific implementations of their dependencies. T
 - **Reduced dependencies:** Block of code can be changed with out **affecting the other code blocks**
 - **Ease of Maintenance and Extension:** Since classes depend on abstractions (interfaces) rather than concrete implementations, it's easier to change or extend functionality without modifying the dependent classes.
 
+> **Foot Note:** > [⬆️Back To Top](#table-of-contents)
 
-
-> **Foot Note:**
-[⬆️Back To Top](#table-of-contents)
 <details>
 <summary><span style="color: brown; font-weight: bold">Click to expand/collapse.</span></summary>
 
 1. **Dependency:** Any object, that another object depends on to perform its tasks. For example, if a class B uses an instance of class A, then A is a **dependency** of B.
-**can be obtained using:**
- - Has - A
- - Is - A
+   **can be obtained using:**
+
+- Has - A
+- Is - A
 
 2. **Injection:** The process of providing the dependency to the dependent object. This can be done in several ways, which are known as DI types or methods.
 
-    >*Types of Dependency Injection:*
-    
-    1. **Constructor Injection:** Dependencies are provided through the class's constructor. This is the most common form of DI.
+   > _Types of Dependency Injection:_
 
-    ```java
-    class Service {
-        private Repository repository;
+   1. **Constructor Injection:** Dependencies are provided through the class's constructor. This is the most common form of DI.
 
-        // Constructor Injection 
-        public Service(Repository repository) {
-            this.repository = repository;
-        }
+   ```java
+   class Service {
+       private Repository repository;
 
-        public void performOperation() {
-            repository.saveData("data");
-        }
-    }
-    ```
-    2. **Setter Injection:**  Dependencies are provided through setter methods after the object is constructed.
+       // Constructor Injection
+       public Service(Repository repository) {
+           this.repository = repository;
+       }
 
-    ```java
-    class Service {
-        private Repository repository;
+       public void performOperation() {
+           repository.saveData("data");
+       }
+   }
+   ```
 
-        // setter DI
-        public void setRepository(Repository repository) {
-            this.repository = repository;
-        }
+   2. **Setter Injection:** Dependencies are provided through setter methods after the object is constructed.
 
-        public void performOperation() {
-            repository.saveData("data");
-        }
-    }
-    ```
+   ```java
+   class Service {
+       private Repository repository;
 
-    3. **Interface Injection:** The dependency is injected through an interface that the dependent class implements. *This method is less common.*
+       // setter DI
+       public void setRepository(Repository repository) {
+           this.repository = repository;
+       }
 
-    ```java
-    interface RepositoryInjector {
-        void injectRepository(Repository repository);
-    }
+       public void performOperation() {
+           repository.saveData("data");
+       }
+   }
+   ```
 
-    class Service implements RepositoryInjector {
-        private Repository repository;
+   3. **Interface Injection:** The dependency is injected through an interface that the dependent class implements. _This method is less common._
 
-        @Override
-        public void injectRepository(Repository repository) {
-            this.repository = repository;
-        }
+   ```java
+   interface RepositoryInjector {
+       void injectRepository(Repository repository);
+   }
 
-        public void performOperation() {
-            repository.saveData("data");
-        }
-    }
-    ```
+   class Service implements RepositoryInjector {
+       private Repository repository;
 
-    4. **Field Injection:**
-    Dependencies are directly injected into the fields of a class, typically using **reflection in frameworks like Spring.** *This method is also less commonly used due to potential difficulties in testing and understanding the code.*
+       @Override
+       public void injectRepository(Repository repository) {
+           this.repository = repository;
+       }
 
-    ``` java 
-    class Service {
-        @Inject
-        private Repository repository;
+       public void performOperation() {
+           repository.saveData("data");
+       }
+   }
+   ```
 
-        public void performOperation() {
-            repository.saveData("data");
-        }
-    }
-    ```
-    In this case, a dependency injection framework would automatically inject the **Repository dependency** into the **Service** class.
+   4. **Field Injection:**
+      Dependencies are directly injected into the fields of a class, typically using **reflection in frameworks like Spring.** _This method is also less commonly used due to potential difficulties in testing and understanding the code._
 
+   ```java
+   class Service {
+       @Inject
+       private Repository repository;
 
->**Coupling vs Cohesion:**
+       public void performOperation() {
+           repository.saveData("data");
+       }
+   }
+   ```
 
-| **Aspect**      | **Cohesion**                                  | **Coupling**                              |
-|-----------------|-----------------------------------------------|-------------------------------------------|
-| **Definition**  | Degree to which the elements of a module are related and focused on a single task. | Degree of interdependence between modules or components. |
-| **Goal**        | High cohesion.                                | Low coupling.                             |
-| **Benefits**    | Easier maintenance, better reusability.       | Easier maintenance, improved flexibility, easier testing. |
-| **Example**     | A class that handles only user authentication tasks. | A class that interacts with a database via an interface, not a specific implementation. |
-  
-    
+   In this case, a dependency injection framework would automatically inject the **Repository dependency** into the **Service** class.
+
+> **Coupling vs Cohesion:**
+
+| **Aspect**     | **Cohesion**                                                                       | **Coupling**                                                                            |
+| -------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **Definition** | Degree to which the elements of a module are related and focused on a single task. | Degree of interdependence between modules or components.                                |
+| **Goal**       | High cohesion.                                                                     | Low coupling.                                                                           |
+| **Benefits**   | Easier maintenance, better reusability.                                            | Easier maintenance, improved flexibility, easier testing.                               |
+| **Example**    | A class that handles only user authentication tasks.                               | A class that interacts with a database via an interface, not a specific implementation. |
 
 </details>
 
 ### **Example 1**: Payment Processing System
+
 Problem Without Dependency Inversion
 Imagine a simple e-commerce application where payments can be processed through different payment gateways like PayPal or Stripe. Initially, the payment processing might be **tightly coupled** to a specific payment gateway:
 
@@ -560,10 +593,11 @@ class PaymentProcessor {
     }
 }
 ```
+
 **Here:**
+
 - The PaymentProcessor class is tightly coupled to PayPalPaymentGateway.
 - Adding support for a new payment gateway (e.g., Stripe) would require modifying the PaymentProcessor class.
-
 
 **Applying Dependency Inversion:**
 To apply DIP, we introduce an interface that both the high-level and low-level modules depend on some abstraction like **interface**
@@ -596,18 +630,20 @@ class PaymentProcessor {
     public PaymentProcessor(PaymentGateway paymentGateway) {
         this.paymentGateway = paymentGateway;
     }
-    // we can use this same code to implement diff paymentGateway 
+    // we can use this same code to implement diff paymentGateway
     public void process(double amount) {
         paymentGateway.processPayment(amount);
     }
 }
 ```
+
 With this design:
 
 - The PaymentProcessor class depends on the PaymentGateway interface rather than a specific implementation.
 - You can easily switch between PayPalPaymentGateway, StripePaymentGateway, or any other gateway without changing the PaymentProcessor class.
 
 **Main Function:**
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -625,6 +661,7 @@ public class Main {
 ```
 
 ### Example 2: Logger in an Application
+
 **Problem Without Dependency Inversion**
 
 Consider an application that logs messages to a file. Initially, the logging functionality might be directly tied to a file-based logger:
@@ -651,6 +688,7 @@ class Application {
 }
 
 ```
+
 In this case:
 
 - The Application class is tightly coupled to FileLogger.
@@ -658,7 +696,8 @@ In this case:
 
 **Applying Dependency Inversion**
 By introducing a Logger interface, we decouple the Application class from the specific logging implementation:
-``` java
+
+```java
 // Abstraction
 interface Logger {
     void log(String message);
@@ -695,6 +734,7 @@ class Application {
 ```
 
 **Main Function:**
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -710,62 +750,66 @@ public class Main {
     }
 }
 ```
+
 **With this design:**
 
 - The Application class depends on the Logger interface, making it easy to switch or extend logging mechanisms without modifying the high-level logic
 
-
-
 # 2. Design Pattern
-Design patterns are general, reusable solutions to common problems that arise in software design. They represent best practices and are based on the experiences and insights of skilled software developers. Design patterns provide a standardized approach to solving problems that can be applied across various types of software projects.
 
+[⬆️Back To Top](#table-of-contents)
+
+Design patterns are general, reusable solutions to common problems that arise in software design. They represent best practices and are based on the experiences and insights of skilled software developers. Design patterns provide a standardized approach to solving problems that can be applied across various types of software projects.
 
 **Key Aspects of Design Patterns:**
 
- - Reusability
- - Common Language
- - Best Practices
- - Flexibility
+- Reusability
+- Common Language
+- Best Practices
+- Flexibility
 
 ### Types of Design Patterns:
 
 1. **Creational Patterns**
-    - a. Builder
-    - b. Factory
-    - c. Singleton
-    - d. Prototype
+
+   - a. Builder
+   - b. Factory
+   - c. Singleton
+   - d. Prototype
 
 2. **Structural Patterns**
-    - a. Adapter
-    - b. Facade
-    - c. Decorator
-    - d. Proxy
+
+   - a. Adapter
+   - b. Facade
+   - c. Decorator
+   - d. Proxy
 
 3. **Behavioral Patterns**
-    - a. Strategy
-    - b. Observer
-    - c. Command
-    - d. Chain of Responsibility
+   - a. Strategy
+   - b. Observer
+   - c. Command
+   - d. Chain of Responsibility
 
+## 2.1 Builder
 
+[⬆️Back To Top](#table-of-contents)
 
-## 2.1 Builder 
-Builder is a *creational* design pattern, which allows *constructing complex objects* in a step by step fashion, where the construction process can vary based on the type of product being built. The pattern separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+Builder is a _creational_ design pattern, which allows _constructing complex objects_ in a step by step fashion, where the construction process can vary based on the type of product being built. The pattern separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+
 > Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process.
 
 Components of the Builder Design Pattern
-1. Product
-2. Builder 
-3. ConcreteBuilder
-4. Director 
-5. Client
 
+1. Product
+2. Builder
+3. ConcreteBuilder
+4. Director
+5. Client
 
 **1.Product** is the complex object that the Builder pattern is responsible for constructing.
 
 - It may consist of multiple components or parts, and its structure can vary based on the implementation.
 - The Product is typically a class with attributes representing the different parts that the Builder constructs.
-
 
 **2. Builder** is an interface or an abstract class that declares the construction steps for building a complex object.
 
@@ -792,7 +836,6 @@ Components of the Builder Design Pattern
 > Scenario:
 
 You are tasked with implementing a system for building custom computers. Each computer can have different configurations based on user preferences. The goal is to provide flexibility in creating computers with varying CPUs, RAM, and storage options.
-
 
 Implement the Builder design pattern to achieve this, allowing the construction of computers through a step-by-step process. Use the provided components – Product (Computer), Builder interface, ConcreteBuilder (GamingComputerBuilder), Director, and Client
 
@@ -840,7 +883,9 @@ public interface Builder {
     Computer getResult();
 }
 ```
+
 3. ConcreteBuilder (GamingComputerBuilder)
+
 ```java
 // ConcreteBuilder
 public class GamingComputerBuilder implements Builder {
@@ -867,6 +912,7 @@ public class GamingComputerBuilder implements Builder {
     }
 }
 ```
+
 4. Director (ComputerDirector)
 
 ```java
@@ -879,7 +925,9 @@ public class ComputerDirector {
     }
 }
 ```
+
 5. Client
+
 ```java
 // Client
 public class Main {
@@ -895,7 +943,7 @@ public class Main {
 }
 ```
 
-Output: 
+Output:
 
 ```
 Computer Configuration:
@@ -905,26 +953,29 @@ Storage: 1TB SSD
 ```
 
 **When to use Builder Design Pattern?**
- - Complex Object COnstruction
- - Step-by-stem construction
- - Avoiding Constructors with multiple parameters
- - Immutable Objects 
- - Configurable Object Creation
- - Common Interface for Multiple Representations 
 
- **When not to use Builder Design Pattern?**
-  - Simple Object Construction
-  - Performace Concerns
-  - Immutable Objects with final fields 
-  - Increased Code Complexity
-  - Tight Coupling with Product 
+- Complex Object COnstruction
+- Step-by-stem construction
+- Avoiding Constructors with multiple parameters
+- Immutable Objects
+- Configurable Object Creation
+- Common Interface for Multiple Representations
 
+**When not to use Builder Design Pattern?**
 
+- Simple Object Construction
+- Performace Concerns
+- Immutable Objects with final fields
+- Increased Code Complexity
+- Tight Coupling with Product
 
-## 2.2 Proxy 
+## 2.2 Proxy
+
+[⬆️Back To Top](#table-of-contents)
+
 The Proxy Design Pattern is a structural design pattern that provides a `surrogate` or `placeholder` for another object to control access to it. This pattern is useful when you want to add an `extra layer of control` over access to an object. The proxy acts as an `intermediary`, controlling access to the real object.
 
-> Real world example: 
+> Real world example:
 
 A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
 
@@ -934,26 +985,27 @@ A real-world example can be `a cheque or credit card` as a proxy for what is in 
 2. RealSubject
 3. Proxy
 
-
-### 2.2.1 Subject 
+### 2.2.1 Subject
 
 The Subject is an interface or an abstract class that defines the common interface shared by the RealSubject and Proxy classes. It declares the methods that the Proxy uses to control access to the RealSubject.
 
- - Declares the common interface for both RealSubject and Proxy.
- - Usually includes the methods that the client code can invoke on the RealSubject and the Proxy.
+- Declares the common interface for both RealSubject and Proxy.
+- Usually includes the methods that the client code can invoke on the RealSubject and the Proxy.
 
 ### 2.2.2 RealSubject
+
 The RealSubject is the actual object that the Proxy represents. It contains the real implementation of the business logic or the resource that the client code wants to access.
 
- - It Implements the operations declared by the Subject interface.
- - Represents the real resource or object that the Proxy controls access to.
+- It Implements the operations declared by the Subject interface.
+- Represents the real resource or object that the Proxy controls access to.
 
- ### 2.2.3. Proxy
+### 2.2.3. Proxy
+
 The Proxy acts as a surrogate or placeholder for the RealSubject. It controls access to the real object and may provide additional functionality such as lazy loading, access control, or logging.
 
- - Implements the same interface as the RealSubject (Subject).
- - Maintains a reference to the RealSubject.
- - Controls access to the RealSubject, adding additional logic if necessary.
+- Implements the same interface as the RealSubject (Subject).
+- Maintains a reference to the RealSubject.
+- Controls access to the RealSubject, adding additional logic if necessary.
 
 > Proxy Design Pattern example
 
@@ -979,50 +1031,51 @@ The RealImage class represents the real object that the proxy will control acces
 - It implements the Image interface, providing concrete implementations for loading and displaying images from disk.
 - The constructor initializes the image file name, and the display() method is responsible for loading the image if not already loaded and then displaying it.
 
-    ```java
-    // RealSubject
-    class RealImage implements Image {
-        private String filename;
+      ```java
+      // RealSubject
+      class RealImage implements Image {
+          private String filename;
 
-        public RealImage(String filename) {
-            this.filename = filename;
-            loadImageFromDisk();
-        }
+          public RealImage(String filename) {
+              this.filename = filename;
+              loadImageFromDisk();
+          }
 
-        private void loadImageFromDisk() {
-            System.out.println("Loading image: " + filename);
-        }
+          private void loadImageFromDisk() {
+              System.out.println("Loading image: " + filename);
+          }
 
-        public void display() {
-            System.out.println("Displaying image: " + filename);
-        }
-    }
-    ```
-> `3. Proxy (ProxyImage Class):`
+          public void display() {
+              System.out.println("Displaying image: " + filename);
+          }
+      }
+      ```
+
+  > `3. Proxy (ProxyImage Class):`
 
 The ProxyImage class acts as a surrogate for the RealImage. It also implements the Image interface, maintaining a reference to the real image object.
 
 - The display() method in the proxy checks whether the real image has been loaded; if not, it creates a new instance of RealImage and delegates the display() call to it.
 - This lazy loading mechanism ensures that the real image is loaded only when necessary.
 
-    ```java
-    // Proxy
-    class ProxyImage implements Image {
-        private RealImage realImage;
-        private String filename;
+  ```java
+  // Proxy
+  class ProxyImage implements Image {
+      private RealImage realImage;
+      private String filename;
 
-        public ProxyImage(String filename) {
-            this.filename = filename;
-        }
+      public ProxyImage(String filename) {
+          this.filename = filename;
+      }
 
-        public void display() {
-            if (realImage == null) {
-                realImage = new RealImage(filename);
-            }
-            realImage.display();
-        }
-    }
-    ```
+      public void display() {
+          if (realImage == null) {
+              realImage = new RealImage(filename);
+          }
+          realImage.display();
+      }
+  }
+  ```
 
 > `4. Client Code:`
 
@@ -1032,21 +1085,21 @@ The client code (ProxyPatternExample) demonstrates the usage of the Proxy Design
 - The proxy, in turn, controls access to the real image, ensuring that it is loaded from disk only when needed.
 - Subsequent calls to display() use the cached image in the proxy, avoiding redundant loading and improving performance.
 
-    ```java
-    // Client code
-    public class ProxyPatternExample {
-        public static void main(String[] args) {
-            Image image = new ProxyImage("example.jpg");
+  ```java
+  // Client code
+  public class ProxyPatternExample {
+      public static void main(String[] args) {
+          Image image = new ProxyImage("example.jpg");
 
-            // Image will be loaded from disk only when display() is called
-            image.display();
+          // Image will be loaded from disk only when display() is called
+          image.display();
 
-            // Image will not be loaded again, as it has been cached in the Proxy
-            image.display();
-        }
-    }
+          // Image will not be loaded again, as it has been cached in the Proxy
+          image.display();
+      }
+  }
 
-    ```
+  ```
 
 <details>
 <summary><span style="color: brown; font-weight: bold">Click to expand/collapse Complete Code of the above example:</span></summary>
@@ -1108,9 +1161,11 @@ public class ProxyPatternExample {
 }
 
 ```
+
 </details>
 
-Output: 
+Output:
+
 ```
 Loading image: example.jpg
 Displaying image: example.jpg
@@ -1119,6 +1174,7 @@ Displaying image: example.jpg
 ```
 
 ### 2.2.4 Why do we need Proxy Design Pattern?
+
 The Proxy Design Pattern is employed to address various concerns and scenarios in software development, providing a way to control access to objects, add functionality, or optimize performance.
 
 - Lazy Loading:
@@ -1137,7 +1193,6 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
   - Proxies provide a convenient point to add logging or monitoring functionalities.
   - By intercepting method calls to the real object, proxies can log information, track usage, or measure performance without modifying the real object.
 
-
 ### 2.2.5 When to use Proxy Design Pattern?
 
 - Deferred Object Creation:
@@ -1148,31 +1203,31 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 ### 2.2.6 When not to use Proxy Design Pattern?
 
 - Overhead for Simple Operations:
-- Unnecessary Abstraction: 
+- Unnecessary Abstraction:
 - Performance Impact:
 - When Access Control Isn’t Needed:
 - When Eager Loading is Acceptable:
 
+## 2.3 Strategy
 
+[⬆️Back To Top](#table-of-contents)
 
-## 2.3 Strategy 
 A strategy pattern is a behavioral design pattern that allows the `behavior` of an object to be selected at `runtime`. It is one of the `Gang of Four (GoF)` design patterns, which are widely used in object-oriented programming. In simpler terms, The Strategy Design Pattern defines `a family of algorithms`, `encapsulates each one`, and makes them `interchangeable`, `allowing clients to switch algorithms dynamically without altering the code structure.`
 
 > Characteristics of the Strategy Design Pattern?
 
-- It defines a family of algorithms: 
+- It defines a family of algorithms:
   - The pattern allows you to encapsulate multiple algorithms or behaviors into separate classes, known as strategies.
 - It encapsulates behaviors:
   - Each strategy encapsulates a specific behavior or algorithm, providing a clean and modular way to manage different variations or implementations.
 - It enables dynamic behavior switching:
   - The pattern enables clients to switch between different strategies at runtime, allowing for flexible and dynamic behavior changes.
-- It promotes object collaboration: 
+- It promotes object collaboration:
   - The pattern encourages collaboration between a context object and strategy objects, where the context delegates the execution of a behavior to a strategy object.
-
 
 > Components of the Strategy Design Pattern
 
-// img --> 
+// img -->
 
 1. Context
 2. Strategy Interface
@@ -1200,7 +1255,6 @@ In the Strategy Design Pattern, communication between the components occurs in a
   - Communication between the components is decoupled, meaning that the Context does not need to know the specific details of how each strategy implements the task.
   - Strategies can be swapped or replaced without impacting the client or other strategies, as long as they adhere to the common interface.
 
-
 Overall, communication in the Strategy Design Pattern involves the Context class invoking a method on the selected strategy object, which triggers the execution of a specific algorithm or behavior to perform a task. This separation of task execution from the selection and configuration of the strategy promotes flexibility, modularity, and code reusability within the software system.
 
 > Real-World Analogy of Strategy Design Pattern
@@ -1208,9 +1262,9 @@ Overall, communication in the Strategy Design Pattern involves the Context class
 Imagine you’re planning a trip to a new city, and you have several options for getting there: by car, by train, or by plane. Each mode of transportation offers its own set of advantages and disadvantages, depending on factors such as cost, travel time, and convenience.
 
 - Context
-You, as the traveler, represent the context in this analogy. You have a specific goal (reaching the new city) and need to choose the best transportation strategy to achieve it.
+  You, as the traveler, represent the context in this analogy. You have a specific goal (reaching the new city) and need to choose the best transportation strategy to achieve it.
 - Strategies
-The different modes of transportation (car, train, plane) represent the strategies in this analogy. Each strategy (mode of transportation) offers a different approach to reaching your destination.
+  The different modes of transportation (car, train, plane) represent the strategies in this analogy. Each strategy (mode of transportation) offers a different approach to reaching your destination.
 
 - Interface
   - The interface in this analogy is the set of common criteria you consider when choosing a transportation mode, such as cost, travel time, and convenience.
@@ -1223,34 +1277,32 @@ The different modes of transportation (car, train, plane) represent the strategi
   - The Strategy Design Pattern allows you to dynamically select the best strategy (transportation mode) based on changing circumstances.
   - For instance, if your initial flight is canceled due to bad weather, you can quickly switch to an alternative mode of transportation, such as taking a train or renting a car, without having to change your overall travel plans drastically.
 
-
 > Strategy Design Pattern Example
 
 Let’s consider a sorting application where we need to sort a list of integers. However, the sorting algorithm to be used may vary depending on factors such as the size of the list and the desired performance characteristics.
 
 > Challenges Without Using Strategy Pattern:
+
 - Limited Flexibility:
   > mplementing sorting algorithms directly within the main sorting class can make the code inflexible. Adding new sorting algorithms or changing existing ones would require modifying the main class, which violates the Open/Closed Principle.
-- Code Duplicatin 
+- Code Duplicatin
   > Without a clear structure, you may end up duplicating sorting logic to handle different algorithms. This can lead to maintenance issues and inconsistency in the system.
-- Hard-Coded Logic 
+- Hard-Coded Logic
   > Implementing sorting logic directly within the main sorting class can make the code rigid and difficult to extend or modify. Making changes to the sorting algorithm becomes cumbersome and error-prone.
 
-// image --> 
 ![Strategy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/strategy-example.png?raw=true)
 
 > How Strategy Pattern helps to solve above challenges :
 
 The Strategy Design Pattern addresses these challenges by encapsulating each sorting algorithm into separate classes. This allows for better organization, code reuse, and flexibility in the system. Here’s how the Strategy Pattern helps:
 
-- Code Reusability: 
+- Code Reusability:
   > By encapsulating sorting algorithms into separate strategy classes, you can reuse these strategies across different parts of the system. This reduces code duplication and promotes maintainability.
-- Flexibility and Extensibility: 
+- Flexibility and Extensibility:
   > With the Strategy Pattern, you can easily add new sorting algorithms or change existing ones without modifying existing code. Each strategy is independent and can be swapped or extended without affecting other parts of the system.
-- Separation of Concerns: 
+- Separation of Concerns:
   > The Strategy Pattern promotes a clean separation of concerns by isolating sorting logic into separate strategy classes. This improves code readability, testability, and maintainability.
 
- 
 Complete Code of the above example:
 
 1. Context(SortingContext)
@@ -1272,12 +1324,15 @@ public class SortingContext {
 	}
 }
 ```
+
 2. Strategy Interface(SortingStrategy)
+
 ```java
 public interface SortingStrategy {
 	void sort(int[] array);
 }
 ```
+
 3. Concrete Strategies
 
 ```java
@@ -1308,6 +1363,7 @@ public class QuickSortStrategy implements SortingStrategy {
 	}
 }
 ```
+
 4. Client Component
 
 ```java
@@ -1330,10 +1386,12 @@ public class Client {
 	}
 }
 ```
+
 <details>
 <summary><span style="color: brown; font-weight: bold">Click to expand/collapse Complete code for the above example.</span></summary>
 
 Below is the complete code for the above example:
+
 ```java
 // SortingContext.java
 class SortingContext {
@@ -1411,6 +1469,7 @@ public class Client {
 </details>
 
 Output
+
 ```
 Sorting using Bubble Sort
 Sorting using Merge Sort
@@ -1418,6 +1477,7 @@ Sorting using Quick Sort
 ```
 
 ### 2.3.1 When to use the Strategy Design Pattern?
+
 Here are some situations where you should consider using the Strategy pattern:
 
 - Multiple Algorithms:
@@ -1431,18 +1491,19 @@ Here are some situations where you should consider using the Strategy pattern:
 - Testing and Extensibility:
   > When you want to facilitate easier unit testing by enabling the substitution of algorithms with mock objects or stubs. Additionally, the Strategy pattern makes it easier to extend the system with new algorithms without modifying existing code.
 
-### 2.3.2 When not to use the Strategy Design Pattern? 
+### 2.3.2 When not to use the Strategy Design Pattern?
 
 Here are some situations where you should consider not using the Strategy pattern:
 
 - Single Algorithm:
-If there is only one fixed algorithm that will be used throughout the lifetime of the application, and there is no need for dynamic selection or switching between algorithms, using the Strategy pattern might introduce unnecessary complexity.
+  If there is only one fixed algorithm that will be used throughout the lifetime of the application, and there is no need for dynamic selection or switching between algorithms, using the Strategy pattern might introduce unnecessary complexity.
 - Overhead:
-If the overhead of implementing multiple strategies outweighs the benefits, especially in simple scenarios where direct implementation without the Strategy pattern is more straightforward and clear.
+  If the overhead of implementing multiple strategies outweighs the benefits, especially in simple scenarios where direct implementation without the Strategy pattern is more straightforward and clear.
 - Inflexible Context:
-If the context class tightly depends on a single algorithm and there is no need for flexibility or interchangeability, using the Strategy pattern may introduce unnecessary abstraction and complexity.
+  If the context class tightly depends on a single algorithm and there is no need for flexibility or interchangeability, using the Strategy pattern may introduce unnecessary abstraction and complexity.
 
 ### 2.3.3 Advantages of the Strategy Design Pattern
+
 Below are the advantages of the strategy design pattern:
 
 - A family of algorithms can be defined as a class hierarchy and can be used interchangeably to alter application behavior without changing its architecture.
@@ -1452,15 +1513,14 @@ Below are the advantages of the strategy design pattern:
 - Data structures used for implementing the algorithm are completely encapsulated in Strategy classes. Therefore, the implementation of an algorithm can be changed without affecting the Context class.
 
 ### 2.3.4 Disadvantages the Strategy Design Pattern
+
 Below are the disadvantages of the strategy design pattern:
 
 - The application must be aware of all the strategies to select the right one for the right situation.
 - Context and the Strategy classes normally communicate through the interface specified by the abstract Strategy base class. Strategy base class must expose interface for all the required behaviours, which some concrete Strategy classes might not implement.
 - In most cases, the application configures the Context with the required Strategy object. Therefore, the application needs to create and maintain two objects in place of one.
 
-
-
-
 > Notes:
- - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
- - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
+
+- And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
+- And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
