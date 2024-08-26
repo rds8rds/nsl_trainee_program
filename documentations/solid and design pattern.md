@@ -729,25 +729,737 @@ Design patterns are general, reusable solutions to common problems that arise in
 
 ### Types of Design Patterns:
 
-1. Creational Patterns
-    a. Builder
-    b. Factory
-    c. Singleton
-    d. prototype
+1. **Creational Patterns**
+    - a. Builder
+    - b. Factory
+    - c. Singleton
+    - d. Prototype
 
-2. Structural Patterns
-    a. Adapter
-    b. Facade
-    c. Decorator
-    d. Proxy 
+2. **Structural Patterns**
+    - a. Adapter
+    - b. Facade
+    - c. Decorator
+    - d. Proxy
 
-3. Behavioral Patterns
-    a. Strategy
-    b. Observer 
-    c. Command
-    d. Chain of Responsiblity 
+3. **Behavioral Patterns**
+    - a. Strategy
+    - b. Observer
+    - c. Command
+    - d. Chain of Responsibility
+
 
 
 ## 2.1 Builder 
-Builder is a creational design pattern, which allows constructing complex objects step by step. Unlike other creational patterns, Builder doesn’t require products to have a common interface. That makes it possible to produce different products using the same construction process.
+Builder is a *creational* design pattern, which allows *constructing complex objects* in a step by step fashion, where the construction process can vary based on the type of product being built. The pattern separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+> Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process.
 
+Components of the Builder Design Pattern
+1. Product
+2. Builder 
+3. ConcreteBuilder
+4. Director 
+5. Client
+
+
+**1.Product** is the complex object that the Builder pattern is responsible for constructing.
+
+- It may consist of multiple components or parts, and its structure can vary based on the implementation.
+- The Product is typically a class with attributes representing the different parts that the Builder constructs.
+
+
+**2. Builder** is an interface or an abstract class that declares the construction steps for building a complex object.
+
+- It typically includes methods for constructing individual parts of the product.
+- By defining an interface, the Builder allows for the creation of different concrete builders that can produce variations of the product.
+
+**3. ConcreteBuilder** classes implement the Builder interface, providing specific implementations for building each part of the product.
+
+- Each ConcreteBuilder is tailored to create a specific variation of the product.
+- It keeps track of the product being constructed and provides methods for setting or constructing each part.
+
+**4. Director** is responsible for managing the construction process of the complex object.
+
+- It collaborates with a Builder, but it doesn’t know the specific details about how each part of the object is constructed.
+- It provides a high-level interface for constructing the product and managing the steps needed to create the complex object.
+
+**5. Client** is the code that initiates the construction of the complex object.
+
+- It creates a Builder object and passes it to the Director to initiate the construction process.
+- The Client may retrieve the final product from the Builder after construction is complete.
+
+### Builder Design Pattern Example:
+
+> Scenario:
+
+You are tasked with implementing a system for building custom computers. Each computer can have different configurations based on user preferences. The goal is to provide flexibility in creating computers with varying CPUs, RAM, and storage options.
+
+
+Implement the Builder design pattern to achieve this, allowing the construction of computers through a step-by-step process. Use the provided components – Product (Computer), Builder interface, ConcreteBuilder (GamingComputerBuilder), Director, and Client
+
+// imge --> 
+
+1. Product (Computer):
+
+```java
+// Product
+public class Computer {
+    private String cpu;
+    private String ram;
+    private String storage;
+
+    public void setCPU(String cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setRAM(String ram) {
+        this.ram = ram;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
+    }
+
+    public void displayInfo() {
+        System.out.println("Computer Configuration:");
+        System.out.println("CPU: " + cpu);
+        System.out.println("RAM: " + ram);
+        System.out.println("Storage: " + storage);
+    }
+}
+
+```
+
+2. Builder Interface
+
+```java
+// Builder interface
+public interface Builder {
+    void buildCPU();
+    void buildRAM();
+    void buildStorage();
+    Computer getResult();
+}
+```
+3. ConcreteBuilder (GamingComputerBuilder)
+```java
+// ConcreteBuilder
+public class GamingComputerBuilder implements Builder {
+    private Computer computer = new Computer();
+
+    @Override
+    public void buildCPU() {
+        computer.setCPU("Gaming CPU");
+    }
+
+    @Override
+    public void buildRAM() {
+        computer.setRAM("16GB DDR4");
+    }
+
+    @Override
+    public void buildStorage() {
+        computer.setStorage("1TB SSD");
+    }
+
+    @Override
+    public Computer getResult() {
+        return computer;
+    }
+}
+```
+4. Director (ComputerDirector)
+
+```java
+// Director
+public class ComputerDirector {
+    public void construct(Builder builder) {
+        builder.buildCPU();
+        builder.buildRAM();
+        builder.buildStorage();
+    }
+}
+```
+5. Client
+```java
+// Client
+public class Main {
+    public static void main(String[] args) {
+        GamingComputerBuilder gamingBuilder = new GamingComputerBuilder();
+        ComputerDirector director = new ComputerDirector();
+
+        director.construct(gamingBuilder);
+        Computer gamingComputer = gamingBuilder.getResult();
+
+        gamingComputer.displayInfo();
+    }
+}
+```
+
+Output: 
+
+```
+Computer Configuration:
+CPU: Gaming CPU
+RAM: 16GB DDR4
+Storage: 1TB SSD
+```
+
+**When to use Builder Design Pattern?**
+ - Complex Object COnstruction
+ - Step-by-stem construction
+ - Avoiding Constructors with multiple parameters
+ - Immutable Objects 
+ - Configurable Object Creation
+ - Common Interface for Multiple Representations 
+
+ **When not to use Builder Design Pattern?**
+  - Simple Object Construction
+  - Performace Concerns
+  - Immutable Objects with final fields 
+  - Increased Code Complexity
+  - Tight Coupling with Product 
+
+
+
+## 2.2 Proxy 
+The Proxy Design Pattern is a structural design pattern that provides a `surrogate` or `placeholder` for another object to control access to it. This pattern is useful when you want to add an `extra layer of control` over access to an object. The proxy acts as an `intermediary`, controlling access to the real object.
+
+> Real world example: 
+
+A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
+
+> Components of Proxy Design Pattern
+
+1. Subject
+2. RealSubject
+3. Proxy
+
+
+### 2.2.1 Subject 
+
+The Subject is an interface or an abstract class that defines the common interface shared by the RealSubject and Proxy classes. It declares the methods that the Proxy uses to control access to the RealSubject.
+
+ - Declares the common interface for both RealSubject and Proxy.
+ - Usually includes the methods that the client code can invoke on the RealSubject and the Proxy.
+
+### 2.2.2 RealSubject
+The RealSubject is the actual object that the Proxy represents. It contains the real implementation of the business logic or the resource that the client code wants to access.
+
+ - It Implements the operations declared by the Subject interface.
+ - Represents the real resource or object that the Proxy controls access to.
+
+ ### 2.2.3. Proxy
+The Proxy acts as a surrogate or placeholder for the RealSubject. It controls access to the real object and may provide additional functionality such as lazy loading, access control, or logging.
+
+ - Implements the same interface as the RealSubject (Subject).
+ - Maintains a reference to the RealSubject.
+ - Controls access to the RealSubject, adding additional logic if necessary.
+
+> Proxy Design Pattern example
+
+Consider a scenario where your application needs to load and display images, and you want to optimize the image loading process. Loading images from disk or other external sources can be resource-intensive, especially if the images are large or stored remotely.
+
+// images ---> 
+
+> `1. Subject (Image Interface):`
+
+The Image interface declares the common methods for displaying images, acting as a blueprint for both the real and proxy objects. In this design, it defines the display() method that both RealImage and ProxyImage must implement. This ensures a uniform interface for clients interacting with image objects.
+
+    ```java
+    // Subject
+    interface Image {
+        void display();
+    }
+    ```
+
+> `2. RealSubject (RealImage Class):`
+
+The RealImage class represents the real object that the proxy will control access to.
+
+- It implements the Image interface, providing concrete implementations for loading and displaying images from disk.
+- The constructor initializes the image file name, and the display() method is responsible for loading the image if not already loaded and then displaying it.
+
+    ```java
+    // RealSubject
+    class RealImage implements Image {
+        private String filename;
+
+        public RealImage(String filename) {
+            this.filename = filename;
+            loadImageFromDisk();
+        }
+
+        private void loadImageFromDisk() {
+            System.out.println("Loading image: " + filename);
+        }
+
+        public void display() {
+            System.out.println("Displaying image: " + filename);
+        }
+    }
+    ```
+> `3. Proxy (ProxyImage Class):`
+
+The ProxyImage class acts as a surrogate for the RealImage. It also implements the Image interface, maintaining a reference to the real image object.
+
+- The display() method in the proxy checks whether the real image has been loaded; if not, it creates a new instance of RealImage and delegates the display() call to it.
+- This lazy loading mechanism ensures that the real image is loaded only when necessary.
+
+    ```java
+    // Proxy
+    class ProxyImage implements Image {
+        private RealImage realImage;
+        private String filename;
+
+        public ProxyImage(String filename) {
+            this.filename = filename;
+        }
+
+        public void display() {
+            if (realImage == null) {
+                realImage = new RealImage(filename);
+            }
+            realImage.display();
+        }
+    }
+    ```
+
+> `4. Client Code:`
+
+The client code (ProxyPatternExample) demonstrates the usage of the Proxy Design Pattern. It creates an Image object, which is actually an instance of ProxyImage.
+
+- The client invokes the display() method on the proxy.
+- The proxy, in turn, controls access to the real image, ensuring that it is loaded from disk only when needed.
+- Subsequent calls to display() use the cached image in the proxy, avoiding redundant loading and improving performance.
+
+    ```java
+    // Client code
+    public class ProxyPatternExample {
+        public static void main(String[] args) {
+            Image image = new ProxyImage("example.jpg");
+
+            // Image will be loaded from disk only when display() is called
+            image.display();
+
+            // Image will not be loaded again, as it has been cached in the Proxy
+            image.display();
+        }
+    }
+
+    ```
+
+<details>
+<summary><span style="color: brown; font-weight: bold">Click to expand/collapse Complete Code of the above example:</span></summary>
+
+This code demonstrates how the Proxy Pattern efficiently manages the loading and displaying of images by introducing a proxy that controls access to the real image object, providing additional functionality such as lazy loading.
+
+```java
+// Subject
+interface Image {
+	void display();
+}
+
+// RealSubject
+class RealImage implements Image {
+	private String filename;
+
+	public RealImage(String filename) {
+		this.filename = filename;
+		loadImageFromDisk();
+	}
+
+	private void loadImageFromDisk() {
+		System.out.println("Loading image: " + filename);
+	}
+
+	public void display() {
+		System.out.println("Displaying image: " + filename);
+	}
+}
+
+// Proxy
+class ProxyImage implements Image {
+	private RealImage realImage;
+	private String filename;
+
+	public ProxyImage(String filename) {
+		this.filename = filename;
+	}
+
+	public void display() {
+		if (realImage == null) {
+			realImage = new RealImage(filename);
+		}
+		realImage.display();
+	}
+}
+
+// Client code
+public class ProxyPatternExample {
+	public static void main(String[] args) {
+		Image image = new ProxyImage("example.jpg");
+
+		// Image will be loaded from disk only when display() is called
+		image.display();
+
+		// Image will not be loaded again, as it has been cached in the Proxy
+		image.display();
+	}
+}
+
+```
+</details>
+
+Output: 
+```
+Loading image: example.jpg
+Displaying image: example.jpg
+Displaying image: example.jpg
+
+```
+
+### 2.2.4 Why do we need Proxy Design Pattern?
+The Proxy Design Pattern is employed to address various concerns and scenarios in software development, providing a way to control access to objects, add functionality, or optimize performance.
+
+- Lazy Loading:
+  - One of the primary use cases for proxies is lazy loading. In situations where creating or initializing an object is resource-intensive, the proxy delays the creation of the real object until it is actually needed.
+  - This can lead to improved performance by avoiding unnecessary resource allocation.
+- Access Control:
+  - Proxies can enforce access control policies.
+  - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
+- Protection Proxy:
+  - Protection proxies control access to a real object by adding an additional layer of security checks.
+  - They can ensure that the client code has the necessary permissions before allowing access to the real object.
+- Caching:
+  - Proxies can implement caching mechanisms to store results or resources.
+  - This is particularly useful when repeated operations on a real object can be optimized by caching previous results, avoiding redundant computations or data fetching.
+- Logging and Monitoring:
+  - Proxies provide a convenient point to add logging or monitoring functionalities.
+  - By intercepting method calls to the real object, proxies can log information, track usage, or measure performance without modifying the real object.
+
+
+### 2.2.5 When to use Proxy Design Pattern?
+
+- Deferred Object Creation:
+- Access Control and Permissions:
+- Resource Optimization:
+- Remote Object Interaction:
+
+### 2.2.6 When not to use Proxy Design Pattern?
+
+- Overhead for Simple Operations:
+- Unnecessary Abstraction: 
+- Performance Impact:
+- When Access Control Isn’t Needed:
+- When Eager Loading is Acceptable:
+
+
+
+## 2.3 Strategy 
+A strategy pattern is a behavioral design pattern that allows the `behavior` of an object to be selected at `runtime`. It is one of the `Gang of Four (GoF)` design patterns, which are widely used in object-oriented programming. In simpler terms, The Strategy Design Pattern defines `a family of algorithms`, `encapsulates each one`, and makes them `interchangeable`, `allowing clients to switch algorithms dynamically without altering the code structure.`
+
+> Characteristics of the Strategy Design Pattern?
+
+- It defines a family of algorithms: 
+  - The pattern allows you to encapsulate multiple algorithms or behaviors into separate classes, known as strategies.
+- It encapsulates behaviors:
+  - Each strategy encapsulates a specific behavior or algorithm, providing a clean and modular way to manage different variations or implementations.
+- It enables dynamic behavior switching:
+  - The pattern enables clients to switch between different strategies at runtime, allowing for flexible and dynamic behavior changes.
+- It promotes object collaboration: 
+  - The pattern encourages collaboration between a context object and strategy objects, where the context delegates the execution of a behavior to a strategy object.
+
+
+> Components of the Strategy Design Pattern
+
+// img --> 
+
+1. Context
+2. Strategy Interface
+3. Concrete Strtegies
+4. Client
+
+> Communication between the Components
+
+In the Strategy Design Pattern, communication between the components occurs in a structured and decoupled manner. Here’s how the components interact with each other:
+
+- Client to Context:
+  - The Client, which knows the requirements of the task, interacts with the Context to initiate the task execution.
+  - The Client selects an appropriate strategy based on the task requirements and provides it to the Context.
+  - The Client may configure the selected strategy before passing it to the Context if necessary.
+- Context to Strategy:
+  - The Context holds a reference to the selected strategy and delegates the task to it.
+  - The Context invokes a method on the strategy object, triggering the execution of the specific algorithm or behavior encapsulated within the strategy.
+- Strategy to Context:
+  - Once the strategy completes its execution, it may return a result or perform any necessary actions.
+  - The strategy communicates the result or any relevant information back to the Context, which may further process or utilize the result as needed.
+- Strategy Interface as Contract:
+  - The Strategy Interface serves as a contract that defines a set of methods that all concrete strategies must implement.
+  - The Context communicates with strategies through the common interface, promoting interchangeability and decoupling.
+- Decoupled Communication:
+  - Communication between the components is decoupled, meaning that the Context does not need to know the specific details of how each strategy implements the task.
+  - Strategies can be swapped or replaced without impacting the client or other strategies, as long as they adhere to the common interface.
+
+
+Overall, communication in the Strategy Design Pattern involves the Context class invoking a method on the selected strategy object, which triggers the execution of a specific algorithm or behavior to perform a task. This separation of task execution from the selection and configuration of the strategy promotes flexibility, modularity, and code reusability within the software system.
+
+> Real-World Analogy of Strategy Design Pattern
+
+Imagine you’re planning a trip to a new city, and you have several options for getting there: by car, by train, or by plane. Each mode of transportation offers its own set of advantages and disadvantages, depending on factors such as cost, travel time, and convenience.
+
+- Context
+You, as the traveler, represent the context in this analogy. You have a specific goal (reaching the new city) and need to choose the best transportation strategy to achieve it.
+- Strategies
+The different modes of transportation (car, train, plane) represent the strategies in this analogy. Each strategy (mode of transportation) offers a different approach to reaching your destination.
+
+- Interface
+  - The interface in this analogy is the set of common criteria you consider when choosing a transportation mode, such as cost, travel time, and convenience.
+  - These criteria serve as the common interface that all strategies must adhere to.
+- Flexibility:
+  - Just as the Strategy Design Pattern allows you to dynamically switch between different algorithms at runtime, you have the flexibility to choose a transportation mode based on your specific requirements and constraints.
+  - For example, if you value speed and are willing to pay more, you might choose to fly.
+  - If you prioritize cost-effectiveness and don’t mind a longer travel time, you might opt for a train or car.
+- Dynamic Selection:
+  - The Strategy Design Pattern allows you to dynamically select the best strategy (transportation mode) based on changing circumstances.
+  - For instance, if your initial flight is canceled due to bad weather, you can quickly switch to an alternative mode of transportation, such as taking a train or renting a car, without having to change your overall travel plans drastically.
+
+
+> Strategy Design Pattern Example
+
+Let’s consider a sorting application where we need to sort a list of integers. However, the sorting algorithm to be used may vary depending on factors such as the size of the list and the desired performance characteristics.
+
+> Challenges Without Using Strategy Pattern:
+- Limited Flexibility:
+  > mplementing sorting algorithms directly within the main sorting class can make the code inflexible. Adding new sorting algorithms or changing existing ones would require modifying the main class, which violates the Open/Closed Principle.
+- Code Duplicatin 
+  > Without a clear structure, you may end up duplicating sorting logic to handle different algorithms. This can lead to maintenance issues and inconsistency in the system.
+- Hard-Coded Logic 
+  > Implementing sorting logic directly within the main sorting class can make the code rigid and difficult to extend or modify. Making changes to the sorting algorithm becomes cumbersome and error-prone.
+
+// image --> 
+
+> How Strategy Pattern helps to solve above challenges :
+
+The Strategy Design Pattern addresses these challenges by encapsulating each sorting algorithm into separate classes. This allows for better organization, code reuse, and flexibility in the system. Here’s how the Strategy Pattern helps:
+
+- Code Reusability: 
+  > By encapsulating sorting algorithms into separate strategy classes, you can reuse these strategies across different parts of the system. This reduces code duplication and promotes maintainability.
+- Flexibility and Extensibility: 
+  > With the Strategy Pattern, you can easily add new sorting algorithms or change existing ones without modifying existing code. Each strategy is independent and can be swapped or extended without affecting other parts of the system.
+- Separation of Concerns: 
+  > The Strategy Pattern promotes a clean separation of concerns by isolating sorting logic into separate strategy classes. This improves code readability, testability, and maintainability.
+
+ 
+Complete Code of the above example:
+
+1. Context(SortingContext)
+
+```java
+public class SortingContext {
+	private SortingStrategy sortingStrategy;
+
+	public SortingContext(SortingStrategy sortingStrategy) {
+		this.sortingStrategy = sortingStrategy;
+	}
+
+	public void setSortingStrategy(SortingStrategy sortingStrategy) {
+		this.sortingStrategy = sortingStrategy;
+	}
+
+	public void performSort(int[] array) {
+		sortingStrategy.sort(array);
+	}
+}
+```
+2. Strategy Interface(SortingStrategy)
+```java
+public interface SortingStrategy {
+	void sort(int[] array);
+}
+```
+3. Concrete Strategies
+
+```java
+// BubbleSortStrategy
+public class BubbleSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Bubble Sort algorithm
+		System.out.println("Sorting using Bubble Sort");
+	}
+}
+
+// MergeSortStrategy
+public class MergeSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Merge Sort algorithm
+		System.out.println("Sorting using Merge Sort");
+	}
+}
+
+// QuickSortStrategy
+public class QuickSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Quick Sort algorithm
+		System.out.println("Sorting using Quick Sort");
+	}
+}
+```
+4. Client Component
+
+```java
+public class Client {
+	public static void main(String[] args) {
+		// Create SortingContext with BubbleSortStrategy
+		SortingContext sortingContext = new SortingContext(new BubbleSortStrategy());
+		int[] array1 = {5, 2, 9, 1, 5};
+		sortingContext.performSort(array1); // Output: Sorting using Bubble Sort
+
+		// Change strategy to MergeSortStrategy
+		sortingContext.setSortingStrategy(new MergeSortStrategy());
+		int[] array2 = {8, 3, 7, 4, 2};
+		sortingContext.performSort(array2); // Output: Sorting using Merge Sort
+
+		// Change strategy to QuickSortStrategy
+		sortingContext.setSortingStrategy(new QuickSortStrategy());
+		int[] array3 = {6, 1, 3, 9, 5};
+		sortingContext.performSort(array3); // Output: Sorting using Quick Sort
+	}
+}
+```
+<details>
+<summary><span style="color: brown; font-weight: bold">Click to expand/collapse Complete code for the above example.</span></summary>
+
+Below is the complete code for the above example:
+```java
+// SortingContext.java
+class SortingContext {
+	private SortingStrategy sortingStrategy;
+
+	public SortingContext(SortingStrategy sortingStrategy) {
+		this.sortingStrategy = sortingStrategy;
+	}
+
+	public void setSortingStrategy(SortingStrategy sortingStrategy) {
+		this.sortingStrategy = sortingStrategy;
+	}
+
+	public void performSort(int[] array) {
+		sortingStrategy.sort(array);
+	}
+}
+
+// SortingStrategy.java
+interface SortingStrategy {
+	void sort(int[] array);
+}
+
+// BubbleSortStrategy.java
+class BubbleSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Bubble Sort algorithm
+		System.out.println("Sorting using Bubble Sort");
+		// Actual Bubble Sort Logic here
+	}
+}
+
+// MergeSortStrategy.java
+class MergeSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Merge Sort algorithm
+		System.out.println("Sorting using Merge Sort");
+		// Actual Merge Sort Logic here
+	}
+}
+
+// QuickSortStrategy.java
+class QuickSortStrategy implements SortingStrategy {
+	@Override
+	public void sort(int[] array) {
+		// Implement Quick Sort algorithm
+		System.out.println("Sorting using Quick Sort");
+		// Actual Quick Sort Logic here
+	}
+}
+
+// Client.java
+public class Client {
+	public static void main(String[] args) {
+		// Create SortingContext with BubbleSortStrategy
+		SortingContext sortingContext = new SortingContext(new BubbleSortStrategy());
+		int[] array1 = {5, 2, 9, 1, 5};
+		sortingContext.performSort(array1); // Output: Sorting using Bubble Sort
+
+		// Change strategy to MergeSortStrategy
+		sortingContext.setSortingStrategy(new MergeSortStrategy());
+		int[] array2 = {8, 3, 7, 4, 2};
+		sortingContext.performSort(array2); // Output: Sorting using Merge Sort
+
+		// Change strategy to QuickSortStrategy
+		sortingContext.setSortingStrategy(new QuickSortStrategy());
+		int[] array3 = {6, 1, 3, 9, 5};
+		sortingContext.performSort(array3); // Output: Sorting using Quick Sort
+	}
+}
+```
+
+</details>
+
+Output
+```
+Sorting using Bubble Sort
+Sorting using Merge Sort
+Sorting using Quick Sort
+```
+
+### 2.3.1 When to use the Strategy Design Pattern?
+Here are some situations where you should consider using the Strategy pattern:
+
+- Multiple Algorithms:
+  > When you have multiple algorithms that can be used interchangeably based on different contexts, such as sorting algorithms (bubble sort, merge sort, quick sort), searching algorithms, compression algorithms, etc.
+- Encapsulating Algorithms:
+  > When you want to encapsulate the implementation details of algorithms separately from the context that uses them, allowing for easier maintenance, testing, and modification of algorithms without affecting the client code.
+- Runtime Selection:
+  > When you need to dynamically select and switch between different algorithms at runtime based on user preferences, configuration settings, or system states.
+- Reducing Conditional Statements:
+  > When you have a class with multiple conditional statements that choose between different behaviors, using the Strategy pattern helps in eliminating the need for conditional statements and making the code more modular and maintainable.
+- Testing and Extensibility:
+  > When you want to facilitate easier unit testing by enabling the substitution of algorithms with mock objects or stubs. Additionally, the Strategy pattern makes it easier to extend the system with new algorithms without modifying existing code.
+
+### 2.3.2 When not to use the Strategy Design Pattern? 
+
+Here are some situations where you should consider not using the Strategy pattern:
+
+- Single Algorithm:
+If there is only one fixed algorithm that will be used throughout the lifetime of the application, and there is no need for dynamic selection or switching between algorithms, using the Strategy pattern might introduce unnecessary complexity.
+- Overhead:
+If the overhead of implementing multiple strategies outweighs the benefits, especially in simple scenarios where direct implementation without the Strategy pattern is more straightforward and clear.
+- Inflexible Context:
+If the context class tightly depends on a single algorithm and there is no need for flexibility or interchangeability, using the Strategy pattern may introduce unnecessary abstraction and complexity.
+
+### 2.3.3 Advantages of the Strategy Design Pattern
+Below are the advantages of the strategy design pattern:
+
+- A family of algorithms can be defined as a class hierarchy and can be used interchangeably to alter application behavior without changing its architecture.
+- By encapsulating the algorithm separately, new algorithms complying with the same interface can be easily introduced.
+- The application can switch strategies at run-time.
+- Strategy enables the clients to choose the required algorithm, without using a “switch” statement or a series of “if-else” statements.
+- Data structures used for implementing the algorithm are completely encapsulated in Strategy classes. Therefore, the implementation of an algorithm can be changed without affecting the Context class.
+
+### 2.3.4 Disadvantages the Strategy Design Pattern
+Below are the disadvantages of the strategy design pattern:
+
+- The application must be aware of all the strategies to select the right one for the right situation.
+- Context and the Strategy classes normally communicate through the interface specified by the abstract Strategy base class. Strategy base class must expose interface for all the required behaviours, which some concrete Strategy classes might not implement.
+- In most cases, the application configures the Context with the required Strategy object. Therefore, the application needs to create and maintain two objects in place of one.
+
+
+
+
+> Notes:
+ - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
+ - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
