@@ -1313,21 +1313,21 @@ A real-world example can be `a cheque or credit card` as a proxy for what is in 
 
 ### 2.2.1 Subject
 
-The Subject is an interface or an abstract class that defines the common interface shared by the RealSubject and Proxy classes. It declares the methods that the Proxy uses to control access to the RealSubject.
+The Subject is an `interface or an abstract class` that defines the common interface `shared by the RealSubject and Proxy classes.` It declares the `methods` that the Proxy uses to control access to the RealSubject.
 
 - Declares the common interface for both RealSubject and Proxy.
 - Usually includes the methods that the client code can invoke on the RealSubject and the Proxy.
 
 ### 2.2.2 RealSubject
 
-The RealSubject is the actual object that the Proxy represents. It contains the real implementation of the business logic or the resource that the client code wants to access.
+The RealSubject is the `actual object` that the Proxy represents. It contains the `real implementation of the business logic` or the `resource` that the `client code wants to access.`
 
 - It Implements the operations declared by the Subject interface.
 - Represents the real resource or object that the Proxy controls access to.
 
 ### 2.2.3. Proxy
 
-The Proxy acts as a surrogate or placeholder for the RealSubject. It controls access to the real object and may provide additional functionality such as lazy loading, access control, or logging.
+The Proxy acts as a `surrogate` or `placeholder` for the `RealSubject`. It controls access to the real object and may provide additional functionality such as `lazy loading`, `access control`, or `logging`.
 
 - Implements the same interface as the RealSubject (Subject).
 - Maintains a reference to the RealSubject.
@@ -1335,13 +1335,13 @@ The Proxy acts as a surrogate or placeholder for the RealSubject. It controls ac
 
 > Proxy Design Pattern example
 
-Consider a scenario where your application needs to load and display images, and you want to optimize the image loading process. Loading images from disk or other external sources can be resource-intensive, especially if the images are large or stored remotely.
+Consider a scenario where your `application` needs to `load and display images`, and you want to `optimize` the `image loading process.` Loading images from disk or other external sources can be `resource-intensive`, especially if the images are` large or stored remotely.`
 
 ![Proxy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/proxy-example.png?raw=true)
 
-> `1. Subject (Image Interface):`
+> **1. Subject (Image Interface):**
 
-The Image interface declares the common methods for displaying images, acting as a blueprint for both the real and proxy objects. In this design, it defines the display() method that both RealImage and ProxyImage must implement. This ensures a uniform interface for clients interacting with image objects.
+The Image interface declares the `common methods` for displaying images, acting as a `blueprint` for both the `real and proxy objects`. In this design, it defines the display() method that both RealImage and ProxyImage must implement. This ensures a uniform interface for clients interacting with image objects.
 
 ```java
 // Subject
@@ -1350,12 +1350,12 @@ interface Image {
 }
 ```
 
-> `2. RealSubject (RealImage Class):`
+> **2. RealSubject (RealImage Class):**
 
-The RealImage class represents the real object that the proxy will control access to.
+The RealImage class represents the `real object` that the `proxy will control access to.`
 
-- It implements the Image interface, providing concrete implementations for loading and displaying images from disk.
-- The constructor initializes the image file name, and the display() method is responsible for loading the image if not already loaded and then displaying it.
+- It implements the `Image interface`, providing `concrete implementations` for loading and displaying images from disk.
+- The constructor initializes the image file name, and the `display()` method is responsible `for loading the image`` if not already loaded` and then displaying it.
 
     ```java
     // RealSubject
@@ -1377,12 +1377,12 @@ The RealImage class represents the real object that the proxy will control acces
     }
     ```
 
-  > `3. Proxy (ProxyImage Class):`
+> **3. Proxy (ProxyImage Class)**:
 
-The ProxyImage class acts as a surrogate for the RealImage. It also implements the Image interface, maintaining a reference to the real image object.
+The ProxyImage class acts as a `surrogate` for the RealImage. It also `implements` the Image interface,` maintaining a reference` to the real image object.
 
-- The display() method in the proxy checks whether the real image has been loaded; if not, it creates a new instance of RealImage and delegates the display() call to it.
-- This lazy loading mechanism ensures that the real image is loaded only when necessary.
+- The display() method in the proxy `checks` whether the real image has been loaded; if not, it creates a new instance of RealImage and delegates the display() call to it.
+- This `lazy loading` mechanism ensures that the real image is loaded only when necessary.
 
   ```java
   // Proxy
@@ -1403,7 +1403,7 @@ The ProxyImage class acts as a surrogate for the RealImage. It also implements t
   }
   ```
 
-> `4. Client Code:`
+> **4. Client Code:**
 
 The client code (ProxyPatternExample) demonstrates the usage of the Proxy Design Pattern. It creates an Image object, which is actually an instance of ProxyImage.
 
@@ -1506,12 +1506,9 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 - Lazy Loading:
   - One of the primary use cases for proxies is lazy loading. In situations where creating or initializing an object is resource-intensive, the proxy delays the creation of the real object until it is actually needed.
   - This can lead to improved performance by avoiding unnecessary resource allocation.
-- Access Control:
+- [Access Control:](#271-access-control-example)
   - Proxies can enforce access control policies.
   - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
-- Protection Proxy:
-  - Protection proxies control access to a real object by adding an additional layer of security checks.
-  - They can ensure that the client code has the necessary permissions before allowing access to the real object.
 - Caching:
   - Proxies can implement caching mechanisms to store results or resources.
   - This is particularly useful when repeated operations on a real object can be optimized by caching previous results, avoiding redundant computations or data fetching.
@@ -1534,6 +1531,214 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 - When Access Control Isn’t Needed:
 - When Eager Loading is Acceptable:
 
+### 2.7 More Examples on Proxy Design Pattern
+
+[⬆️](#table-of-contents)
+- [Access Control](#271-access-control-example)
+- 
+
+Let's say you have a `SensitiveData` class that represents some sensitive information that should only be accessed by authorized users. You can use a proxy to control access to this data.
+
+
+#### [2.7.1 Access Control Example](#27-more-examples-on-proxy-design-pattern)
+
+
+##### 1\. **Subject Interface**
+
+First, define an interface that both the real object and the proxy will implement.
+
+```java
+public interface Data {
+    void displayData();
+}
+```
+##### 2\. **Real Subject**
+
+This is the actual object that we want to control access to.
+
+```java
+public class SensitiveData implements Data {
+    private String confidentialInfo;
+
+    public SensitiveData(String confidentialInfo) {
+        this.confidentialInfo = confidentialInfo;
+    }
+
+    @Override
+    public void displayData() {
+        System.out.println("Displaying Sensitive Data: " + confidentialInfo);
+    }
+}
+```
+```
+public class SensitiveData implements Data {
+    private String confidentialInfo;
+
+    public SensitiveData(String confidentialInfo) {
+        this.confidentialInfo = confidentialInfo;
+    }
+
+    @Override
+    public void displayData() {
+        System.out.println("Displaying Sensitive Data: " + confidentialInfo);
+    }
+}
+```
+##### 3\. **Proxy**
+
+The proxy class controls access to the real object. It can check permissions before forwarding the request to the real object.
+```java
+public class DataProxy implements Data {
+    private SensitiveData sensitiveData;
+    private String userRole;
+
+    public DataProxy(String confidentialInfo, String userRole) {
+        this.sensitiveData = new SensitiveData(confidentialInfo);
+        this.userRole = userRole;
+    }
+
+    @Override
+    public void displayData() {
+        if (userRole.equals("ADMIN")) {
+            sensitiveData.displayData();
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+        }
+    }
+}
+```
+##### 4\. **Client Code**
+
+The client interacts with the proxy, which controls access to the real object.
+```java
+public class Client {
+    public static void main(String[] args) {
+        Data adminData = new DataProxy("Secret Admin Info", "ADMIN");
+        Data userData = new DataProxy("Secret User Info", "USER");
+
+        System.out.println("Admin Access:");
+        adminData.displayData(); // Should display the data
+
+        System.out.println("\nUser Access:");
+        userData.displayData(); // Should deny access
+    }
+}
+```
+
+
+### [2.7.2 Logging Example]()
+Let's consider a banking system where we want to log every transaction made by a user. We'll use a proxy to log the details of each transaction before passing the request to the real bank account object.
+
+### 1\. **Subject Interface**
+
+Define an interface that both the real subject and the proxy will implement.
+
+```java
+public interface BankAccount {
+    void deposit(double amount);
+    void withdraw(double amount);
+    double getBalance();
+}
+```
+### 2\. **Real Subject**
+
+This class represents the actual bank account.
+
+```java
+public class RealBankAccount implements BankAccount {
+    private double balance;
+
+    public RealBankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrew: " + amount);
+        } else {
+            System.out.println("Insufficient funds for withdrawal of: " + amount);
+        }
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+}
+```
+### 3\. **Proxy**
+
+The proxy class will add logging functionality by logging each method call and then delegating the actual work to the real bank account.
+
+```java
+import java.util.Date;
+
+public class LoggingBankAccountProxy implements BankAccount {
+    private RealBankAccount realAccount;
+
+    public LoggingBankAccountProxy(double initialBalance) {
+        this.realAccount = new RealBankAccount(initialBalance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        log("Deposit", amount);
+        realAccount.deposit(amount);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        log("Withdraw", amount);
+        realAccount.withdraw(amount);
+    }
+
+    @Override
+    public double getBalance() {
+        double balance = realAccount.getBalance();
+        log("Get Balance", balance);
+        return balance;
+    }
+
+    private void log(String operation, double amount) {
+        System.out.println(new Date() + " - Logging: " + operation + " of " + amount);
+    }
+}
+```
+### 4\. **Client Code**
+
+The client interacts with the proxy, which logs the operations and then delegates them to the real object.
+```java
+public class Client {
+    public static void main(String[] args) {
+        BankAccount account = new LoggingBankAccountProxy(1000.0);
+
+        account.deposit(200.0);  // Log and deposit
+        account.withdraw(150.0); // Log and withdraw
+        double balance = account.getBalance(); // Log and get balance
+
+        System.out.println("Final Balance: " + balance);
+    }
+}
+```
+### Output:
+
+```java
+Wed Aug 27 12:00:00 UTC 2024 - Logging: Deposit of 200.0
+Deposited: 200.0
+Wed Aug 27 12:00:01 UTC 2024 - Logging: Withdraw of 150.0
+Withdrew: 150.0
+Wed Aug 27 12:00:02 UTC 2024 - Logging: Get Balance of 1050.0
+Final Balance: 1050.0
+
+```
 ## 2.3 Strategy
 
 [⬆️Back To Top](#table-of-contents)
