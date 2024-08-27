@@ -1856,4 +1856,4 @@ Below are the disadvantages of the strategy design pattern:
 [⬆️Back To Top](#table-of-contents)
 
 - [Uncle Bob SOLID principle](https://www.youtube.com/watch?v=zHiWqnTWsn4&t=302s)
-- [Head First Design Pattern]()
+- [Head First Design Pattern](https://github.com/rds8rds/nsl_trainee_program/blob/main/books/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D-1.pdf)
