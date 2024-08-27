@@ -808,7 +808,7 @@ Builder is a _creational_ design pattern, which allows _constructing complex obj
 
 > Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process. **[Different Concrete builder to produce different products]**
 
-[example](#builder-more-example)
+[example here ➡️](#builder-more-example)
 
 Components of the Builder Design Pattern
 
@@ -818,27 +818,27 @@ Components of the Builder Design Pattern
 4. Director
 5. Client
 
-**1.Product** is the complex object that the Builder pattern is responsible for constructing.
+**1.Product** is the `complex object` that the Builder pattern is responsible for `constructing`.
 
 - It may consist of multiple components or parts, and its structure can vary based on the implementation.
 - The Product is typically a class with attributes representing the different parts that the Builder constructs.
 
-**2. Builder** is an **interface or an abstract class** that declares the construction steps for building a complex object.
+**2. Builder** is an `interface or an abstract class` that declares the construction steps for building a complex object.
 
 - It typically includes methods for constructing individual parts of the product.
 - By defining an interface, the Builder allows for the creation of different concrete builders that can produce variations of the product.
 
-**3. ConcreteBuilder** classes implement the Builder interface, providing specific implementations for building each part of the product.
+**3. ConcreteBuilder** classes implement the `Builder interface`, providing `specific implementations` for building each part of the product.
 
 - Each ConcreteBuilder is tailored to create a specific variation of the product.
 - It keeps track of the product being constructed and provides methods for setting or constructing each part.
 
-**4. Director** is responsible for managing the construction process of the complex object.
+**4. Director** is responsible for managing the construction process of the `complex object.`
 
 - It collaborates with a Builder, but it doesn’t know the specific details about how each part of the object is constructed.
 - It provides a high-level interface for constructing the product and managing the steps needed to create the complex object.
 
-**5. Client** is the code that initiates the construction of the complex object.
+**5. Client** is the code that initiates the construction of the `complex object.`
 
 - It creates a Builder object and passes it to the Director to initiate the construction process.
 - The Client may retrieve the final product from the Builder after construction is complete.
@@ -1164,12 +1164,12 @@ Consider a scenario where your application needs to load and display images, and
 
 The Image interface declares the common methods for displaying images, acting as a blueprint for both the real and proxy objects. In this design, it defines the display() method that both RealImage and ProxyImage must implement. This ensures a uniform interface for clients interacting with image objects.
 
-    ```java
-    // Subject
-    interface Image {
-        void display();
-    }
-    ```
+```java
+// Subject
+interface Image {
+    void display();
+}
+```
 
 > `2. RealSubject (RealImage Class):`
 
@@ -1178,25 +1178,25 @@ The RealImage class represents the real object that the proxy will control acces
 - It implements the Image interface, providing concrete implementations for loading and displaying images from disk.
 - The constructor initializes the image file name, and the display() method is responsible for loading the image if not already loaded and then displaying it.
 
-      ```java
-      // RealSubject
-      class RealImage implements Image {
-          private String filename;
+    ```java
+    // RealSubject
+    class RealImage implements Image {
+        private String filename;
 
-          public RealImage(String filename) {
-              this.filename = filename;
-              loadImageFromDisk();
-          }
+        public RealImage(String filename) {
+            this.filename = filename;
+            loadImageFromDisk();
+        }
 
-          private void loadImageFromDisk() {
-              System.out.println("Loading image: " + filename);
-          }
+        private void loadImageFromDisk() {
+            System.out.println("Loading image: " + filename);
+        }
 
-          public void display() {
-              System.out.println("Displaying image: " + filename);
-          }
-      }
-      ```
+        public void display() {
+            System.out.println("Displaying image: " + filename);
+        }
+    }
+    ```
 
   > `3. Proxy (ProxyImage Class):`
 
@@ -1373,8 +1373,6 @@ A strategy pattern is a behavioral design pattern that allows the `behavior` of 
   - The pattern encourages collaboration between a context object and strategy objects, where the context delegates the execution of a behavior to a strategy object.
 
 > Components of the Strategy Design Pattern
-
-// img -->
 
 1. Context
 2. Strategy Interface
