@@ -20,6 +20,8 @@
 
      1. [Strategey Pattern](#23-strategy)
 
+3. [Refferances](#3-referrances)
+
 # 1. SOLID Principle
 
 Design principles encourage us to create more maintainable, understandable, and flexible software. Consequently, as our applications grow in size, we can reduce their complexity and save ourselves a lot of headaches further down the road!
@@ -808,7 +810,7 @@ Builder is a _creational_ design pattern, which allows _constructing complex obj
 
 > Unlike other creational patterns, Builder **doesn’t require** products to have **a common interface**. That makes it possible to produce **different products** using the same construction process. **[Different Concrete builder to produce different products]**
 
-[example](#builder-more-example)
+[example](#builder-more-example-contents)
 
 Components of the Builder Design Pattern
 
@@ -966,9 +968,9 @@ Storage: 1TB SSD
 
 **When to use Builder Design Pattern?**
 
-- Complex Object COnstruction
-- Step-by-stem construction
-- Avoiding Constructors with multiple parameters
+- Complex Object Construction
+- Step-by-step construction
+- Avoiding constructors with multiple parameters
 - Immutable Objects
 - Configurable Object Creation
 - Common Interface for Multiple Representations
@@ -976,17 +978,31 @@ Storage: 1TB SSD
 **When not to use Builder Design Pattern?**
 
 - Simple Object Construction
+  - If the object you are constructing has only a few simple parameters or configurations, and the construction process is straightforward, using a builder might be overkill. In such cases, a simple constructor or `static factory method` might be more appropriate.
 - Performace Concerns
-- Immutable Objects with final fields
+  - In performance-critical applications, the additional overhead introduced by the Builder pattern might be a concern. The extra method calls and object creations involved in the builder process could impact performance, especially if the object construction is frequent and time-sensitive.
 - Increased Code Complexity
-- Tight Coupling with Product
 
-#### Builder More example
+  - Introducing a builder class for every complex object can lead to an increase in code complexity. If the object being constructed is simple and doesn’t benefit significantly from a step-by-step construction process, using a builder might add unnecessary complexity to the codebase.
+
+- Tight Coupling with Product
+  - If the builder is tightly coupled with the product it constructs, and changes to the product require corresponding modifications to the builder, it might reduce the flexibility and maintainability of the code.
+
+#### Builder more example contents
+
+[⬆️](#21-builder)
+
+- [no common interface](#no-common-interface-example)
+- [immutable class example](#immutable-class-example)
+- [configurable object creation](#configurable-object-creation)
+
+#### no common interface example
+
+[⬆️](#builder-more-example-contents)
 
 ```java
 /*
-** Here is an example where the Builder design pattern is used to create two completely different types of ** products: a Website and a Meal. These products have no common interface, structure, or purpose, yet we ** can still use the Builder pattern to construct them.
-**
+** builder to build object with no common interface
 */
 
 // Product: Website
@@ -1114,6 +1130,169 @@ public class Main {
         System.out.println(meal);
     }
 }
+```
+
+#### Immutable class example
+
+[⬆️](#builder-more-example-contents)
+
+```java
+// Immutable Class
+public class Person {
+    private final String firstName;  // Final fields
+    private final String lastName;
+    private final int age;
+
+    // Private constructor accessible only by the Builder
+    private Person(PersonBuilder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.age = builder.age;
+    }
+
+    // No setters, only getters
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Static Builder class
+    public static class PersonBuilder {
+        private String firstName;  // Same fields as in the Person class
+        private String lastName;
+        private int age;
+
+        // Fluent interface for setting fields
+        public PersonBuilder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public PersonBuilder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public PersonBuilder setAge(int age) {
+            this.age = age;
+            return this;
+        }
+
+        // Method to build the immutable Person object
+        public Person build() {
+            // Here, you can add validations if needed
+            return new Person(this);
+        }
+    }
+}
+
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        // Creating an immutable Person object using the Builder pattern
+        Person person = new Person.PersonBuilder()
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setAge(30)
+                .build();  // Immutable Person object
+
+        System.out.println(person.getFirstName());  // Outputs: John
+    }
+}
+```
+
+#### configurable object creation
+
+[⬆️](#builder-more-example-contents)
+
+```java
+// Product: Car
+public class Car {
+    private final String engineType;
+    private final String color;
+    private final boolean hasSunroof;
+    private final boolean hasGPS;
+
+    // Private constructor, only accessible by the Builder
+    private Car(CarBuilder builder) {
+        this.engineType = builder.engineType;
+        this.color = builder.color;
+        this.hasSunroof = builder.hasSunroof;
+        this.hasGPS = builder.hasGPS;
+    }
+
+    @Override
+    public String toString() {
+        return "Car [Engine Type=" + engineType + ", Color=" + color + ", Sunroof=" + hasSunroof + ", GPS=" + hasGPS + "]";
+    }
+
+    // Static Builder class
+    public static class CarBuilder {
+        // Required parameters
+        private final String engineType;
+
+        // Optional parameters with default values
+        private String color = "White";
+        private boolean hasSunroof = false;
+        private boolean hasGPS = false;
+
+        // Constructor for required parameters
+        public CarBuilder(String engineType) {
+            this.engineType = engineType;
+        }
+
+        // Setter for optional color
+        public CarBuilder setColor(String color) {
+            this.color = color;
+            return this;
+        }
+
+        // Setter for optional sunroof
+        public CarBuilder setSunroof(boolean hasSunroof) {
+            this.hasSunroof = hasSunroof;
+            return this;
+        }
+
+        // Setter for optional GPS
+        public CarBuilder setGPS(boolean hasGPS) {
+            this.hasGPS = hasGPS;
+            return this;
+        }
+
+        // Build method to create the Car object
+        public Car build() {
+            return new Car(this);
+        }
+    }
+}
+
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        // Creating a configurable car
+        Car car1 = new Car.CarBuilder("V8")
+                .setColor("Red")
+                .setSunroof(true)
+                .build();
+
+        System.out.println(car1);  // Outputs: Car [Engine Type=V8, Color=Red, Sunroof=true, GPS=false]
+
+        // Creating another car with different configurations
+        Car car2 = new Car.CarBuilder("Electric")
+                .setGPS(true)
+                .build();
+
+        System.out.println(car2);  // Outputs: Car [Engine Type=Electric, Color=White, Sunroof=false, GPS=true]
+    }
+}
+
 ```
 
 ## 2.2 Proxy
@@ -1671,3 +1850,10 @@ Below are the disadvantages of the strategy design pattern:
 
 - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
 - And that’s exactly what the Proxy pattern does – ” Controls and manages access to the object they are protecting”.
+
+# 3. Referrances
+
+[⬆️Back To Top](#table-of-contents)
+
+- [Uncle Bob SOLID principle](https://www.youtube.com/watch?v=zHiWqnTWsn4&t=302s)
+- [Head First Design Pattern]()
