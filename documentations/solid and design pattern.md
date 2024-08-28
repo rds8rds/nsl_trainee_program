@@ -853,7 +853,7 @@ You are tasked with implementing a system for building custom computers. Each co
 
 Implement the Builder design pattern to achieve this, allowing the construction of computers through a step-by-step process. Use the provided components – Product (Computer), Builder interface, ConcreteBuilder (GamingComputerBuilder), Director, and Client
 
-![Builder example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/builder-example.png?raw=true)
+![Builder example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/builder-example.jpg?raw=true)
 
 1. Product (Computer):
 
