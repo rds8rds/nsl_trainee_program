@@ -859,6 +859,8 @@ Implement the Builder design pattern to achieve this, allowing the construction 
 
 ```java
 // Product
+// its a mutable object creation example 
+
 public class Computer {
     private String cpu;
     private String ram;
@@ -971,8 +973,8 @@ Storage: 1TB SSD
 - Complex Object Construction
 - Step-by-step construction
 - Avoiding constructors with multiple parameters
-- Immutable Objects
-- Configurable Object Creation
+- Immutable Objects [no change in object attribute after creation]
+- Configurable Object Creation [ we can configure the object on our requirements ]
 - Common Interface for Multiple Representations
 
 **When not to use Builder Design Pattern?**
@@ -1299,13 +1301,13 @@ public class Main {
 
 [⬆️Back To Top](#table-of-contents)
 
-The Proxy Design Pattern is a structural design pattern that provides a `surrogate` or `placeholder` for another object to control access to it. This pattern is useful when you want to add an `extra layer of control` over access to an object. The proxy acts as an `intermediary`, controlling access to the real object.
+The Proxy Design Pattern is a `structural design` pattern that provides a `surrogate` or `placeholder` for another object to control access to it. This pattern is useful when you want to add an `extra layer of control` over access to an object. The proxy acts as an `intermediary`, controlling access to the real object.
 
 > Real world example:
 
 A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
 
-> Components of Proxy Design Pattern
+> 3 Components of Proxy Design Pattern
 
 1. Subject
 2. RealSubject
@@ -1334,7 +1336,7 @@ The Proxy acts as a `surrogate` or `placeholder` for the `RealSubject`. It contr
 - Controls access to the RealSubject, adding additional logic if necessary.
 
 > Proxy Design Pattern example
-
+#### Caching and Lazy Loading Example: 
 Consider a scenario where your `application` needs to `load and display images`, and you want to `optimize` the `image loading process.` Loading images from disk or other external sources can be `resource-intensive`, especially if the images are` large or stored remotely.`
 
 ![Proxy example](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/proxy-example.png?raw=true)
@@ -1355,7 +1357,7 @@ interface Image {
 The RealImage class represents the `real object` that the `proxy will control access to.`
 
 - It implements the `Image interface`, providing `concrete implementations` for loading and displaying images from disk.
-- The constructor initializes the image file name, and the `display()` method is responsible `for loading the image`` if not already loaded` and then displaying it.
+- The constructor initializes the image file name, and the `display()` method is responsible `for loading the image if not already loaded` and then displaying it.
 
     ```java
     // RealSubject
@@ -1393,12 +1395,13 @@ The ProxyImage class acts as a `surrogate` for the RealImage. It also `implement
       public ProxyImage(String filename) {
           this.filename = filename;
       }
-
+      
+      //caching functionality 
       public void display() {
           if (realImage == null) {
               realImage = new RealImage(filename);
           }
-          realImage.display();
+          realImage.display(); 
       }
   }
   ```
@@ -1417,7 +1420,7 @@ The client code (ProxyPatternExample) demonstrates the usage of the Proxy Design
       public static void main(String[] args) {
           Image image = new ProxyImage("example.jpg");
 
-          // Image will be loaded from disk only when display() is called
+          // Image will be loaded from disk only when display() is called [lazy loading ]
           image.display();
 
           // Image will not be loaded again, as it has been cached in the Proxy
@@ -1503,16 +1506,16 @@ Displaying image: example.jpg
 
 The Proxy Design Pattern is employed to address various concerns and scenarios in software development, providing a way to control access to objects, add functionality, or optimize performance.
 
-- Lazy Loading:
+- [Lazy Loading:](#caching-and-lazy-loading-example)
   - One of the primary use cases for proxies is lazy loading. In situations where creating or initializing an object is resource-intensive, the proxy delays the creation of the real object until it is actually needed.
   - This can lead to improved performance by avoiding unnecessary resource allocation.
 - [Access Control:](#271-access-control-example)
   - Proxies can enforce access control policies.
   - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
-- Caching:
+- [Caching:](#caching-and-lazy-loading-example)
   - Proxies can implement caching mechanisms to store results or resources.
   - This is particularly useful when repeated operations on a real object can be optimized by caching previous results, avoiding redundant computations or data fetching.
-- Logging and Monitoring:
+- [Logging and Monitoring:](#272-logging-example)
   - Proxies provide a convenient point to add logging or monitoring functionalities.
   - By intercepting method calls to the real object, proxies can log information, track usage, or measure performance without modifying the real object.
 
@@ -1535,7 +1538,7 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 
 [⬆️](#table-of-contents)
 - [Access Control](#271-access-control-example)
-- 
+- [Logging Example](#272-logging-example)
 
 Let's say you have a `SensitiveData` class that represents some sensitive information that should only be accessed by authorized users. You can use a proxy to control access to this data.
 
@@ -1557,20 +1560,6 @@ public interface Data {
 This is the actual object that we want to control access to.
 
 ```java
-public class SensitiveData implements Data {
-    private String confidentialInfo;
-
-    public SensitiveData(String confidentialInfo) {
-        this.confidentialInfo = confidentialInfo;
-    }
-
-    @Override
-    public void displayData() {
-        System.out.println("Displaying Sensitive Data: " + confidentialInfo);
-    }
-}
-```
-```
 public class SensitiveData implements Data {
     private String confidentialInfo;
 
@@ -1626,7 +1615,7 @@ public class Client {
 ```
 
 
-### [2.7.2 Logging Example]()
+### [2.7.2 Logging Example](#27-more-examples-on-proxy-design-pattern)
 Let's consider a banking system where we want to log every transaction made by a user. We'll use a proxy to log the details of each transaction before passing the request to the real bank account object.
 
 ### 1\. **Subject Interface**
