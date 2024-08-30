@@ -1361,7 +1361,7 @@ The Proxy Design Pattern is a `structural design` pattern that provides a `surro
 
 > Real world example:
 
-A real-world example can be `a cheque or credit card` as a proxy for our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
+A real-world example can be `a cheque or credit card` as a proxy for our bank account. It can be used in place of bank account and provides a means of accessing that cash when required.
 
 > 3 Components of Proxy Design Pattern
 
