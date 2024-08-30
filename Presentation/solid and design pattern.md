@@ -1810,19 +1810,19 @@ In the Strategy Design Pattern, communication between the components occurs in a
 
 ![Strategy Components](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/proxy-generic.png?raw=true)
 
+> Communications between components: 
 
-Communications between components: 
-- Client to Context:
+- **Client to Context:**
   - The Client, **which knows the requirements** of the task, **interacts with the Contex**t to initiate the task execution.
   - The Client **selects an appropriate strategy** based on the task requirements and provides it to the Context.
   - The Client **may configure** the selected strategy before passing it to the Context if necessary.
-- Context to Strategy:
+- **Context to Strategy:**
   - The Context **holds a reference** to the selected strategy and **delegates** the task to it.
   - The Context **invokes a method on the strategy object**, triggering the execution of the specific algorithm or behavior encapsulated within the strategy.
-- Strategy to Context:
+- **Strategy to Context:**
   - Once the strategy completes its execution, it may return **a result** or perform any necessary actions.
   - The strategy **communicates** the result or any relevant information **back to the Context**, which may further process or utilize the result as needed.
-- Strategy Interface as Contract:
+- **Strategy Interface as Contract:**
   - The **Strategy Interface serves as a contract** that defines a set of methods that **all concrete strategies** must implement.
   - The Context communicates with strategies through the common interface, promoting interchangeability and **decoupling**.
 - Decoupled Communication:
@@ -2043,51 +2043,26 @@ Sorting using Bubble Sort
 Sorting using Merge Sort
 Sorting using Quick Sort
 ```
-### 2.3.3 Advantages of the Strategy Design Pattern
+### 2.3.4 Advantages of the Strategy Design Pattern
 
 Below are the advantages of the strategy design pattern:
 
-- A family of algorithms can be defined as a class hierarchy and can be used interchangeably to alter application behavior without changing its architecture.
-- By encapsulating the algorithm separately, new algorithms complying with the same interface can be easily introduced.
-- The application can switch strategies at run-time.
+- A family of algorithms can be defined as a class hierarchy and can be **used interchangeably** to alter application behavior without changing its **architecture**.
+- By **encapsulating** the algorithm separately, new algorithms complying with the **same interface** can be easily introduced.
+- The application **can switch strategies at run-time.**
 - Strategy enables the clients to choose the required algorithm, **without using a “switch” statement or a series of “if-else”** statements.
-- Data structures used for implementing the algorithm are completely encapsulated in Strategy classes. Therefore, the implementation of an algorithm can be changed without affecting the Context class.
-
-### 2.3.4 When to use the Strategy Design Pattern?
-
-Here are some situations where you should consider using the Strategy pattern:
-
-- Multiple Algorithms:
-  > When you have multiple algorithms that can be used interchangeably based on different contexts, such as sorting algorithms (bubble sort, merge sort, quick sort), searching algorithms, compression algorithms, etc.
-- Encapsulating Algorithms:
-  > When you want to encapsulate the implementation details of algorithms separately from the context that uses them, allowing for easier maintenance, testing, and modification of algorithms without affecting the client code.
-- Runtime Selection:
-  > When you need to dynamically select and switch between different algorithms at runtime based on user preferences, configuration settings, or system states.
-- Reducing Conditional Statements:
-  > When you have a class with multiple conditional statements that choose between different behaviors, using the Strategy pattern helps in eliminating the need for conditional statements and making the code more modular and maintainable.
-- Testing and Extensibility:
-  > When you want to facilitate easier unit testing by enabling the substitution of algorithms with mock objects or stubs. Additionally, the Strategy pattern makes it easier to extend the system with new algorithms without modifying existing code.
-
-### 2.3.5 When not to use the Strategy Design Pattern?
-
-Here are some situations where you should consider not using the Strategy pattern:
-
-- Single Algorithm:
-  If there is only one fixed algorithm that will be used throughout the lifetime of the application, and there is no need for dynamic selection or switching between algorithms, using the Strategy pattern might introduce unnecessary complexity.
-- Overhead:
-  If the overhead of implementing multiple strategies outweighs the benefits, especially in simple scenarios where direct implementation without the Strategy pattern is more straightforward and clear.
-- Inflexible Context:
-  If the context class tightly depends on a single algorithm and there is no need for flexibility or interchangeability, using the Strategy pattern may introduce unnecessary abstraction and complexity.
 
 
 
-### 2.3.6 Disadvantages the Strategy Design Pattern
+
+
+### 2.3.5 Disadvantages the Strategy Design Pattern
 
 Below are the disadvantages of the strategy design pattern:
 
 - The application must be aware of all the strategies to select the right one for the right situation.
 - Context and the Strategy classes normally communicate through the interface specified by the abstract Strategy base class. Strategy base class must expose interface for all the required behaviours, which some concrete Strategy classes might not implement.
-- In most cases, the application configures the Context with the required Strategy object. Therefore, the application needs to create and maintain two objects in place of one.
+- In most cases, the application configures the **Context** with the required **Strategy** object. Therefore, the application needs to create and maintain **two objects** in place of one.
 
 > Notes:
 
@@ -2100,3 +2075,9 @@ Below are the disadvantages of the strategy design pattern:
 
 - [Uncle Bob SOLID principle](https://www.youtube.com/watch?v=zHiWqnTWsn4&t=302s)
 - [Head First Design Pattern](https://github.com/rds8rds/nsl_trainee_program/blob/main/books/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D-1.pdf)
+
+
+## Some basics of UML: 
+![uml basics 1](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml-basic-1.png?raw=true)
+
+![uml basics 2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml-basic-2.png?raw=true)
