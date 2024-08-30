@@ -20,6 +20,7 @@
 
      1. [Strategey Pattern](#23-strategy)
 
+
 3. [Refferances](#3-referrances)
 
 # 1. SOLID Principle
@@ -829,7 +830,7 @@ Design patterns are general, reusable solutions to common problems that arise in
 1. **Creational Patterns** 
 > Creational Design Pattern abstract the instantiation process. They help in making a system **independent** of how its **objects** are **created, composed and represented**.
 
-   - a. [Builder]((#21-builder))
+   - a. Builder
    - b. Factory
    - c. Singleton
    - d. Prototype
@@ -837,14 +838,14 @@ Design patterns are general, reusable solutions to common problems that arise in
 2. **Structural Patterns**
 > Structural patterns are concerned with how classes and objects are **composed to form larger structures.** Structural class patterns use **inheritance** to compose interfaces or implementations.
 
-   - a. [Proxy](#22-proxy)
+   - a. Proxy
    - b. Facade
    - c. Decorator
    - d. Adapter 
 
 3. **Behavioral Patterns**
 > Behavioral patterns are concerned with algorithms and the assignment of responsibilities between objects. Behavioral patterns **describe not just patterns of objects or classes** but also the **patterns of communication between them.**
-   - a. [Strategy](#23-strategy)
+   - a. Strategy
    - b. Observer
    - c. Command
    - d. Chain of Responsibility
@@ -1352,7 +1353,7 @@ The Proxy Design Pattern is a `structural design` pattern that provides a `surro
 
 > Real world example:
 
-A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
+A real-world example can be `a cheque or credit card` as a proxy for our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
 
 > 3 Components of Proxy Design Pattern
 
@@ -1556,41 +1557,27 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 - [Lazy Loading:](#caching-and-lazy-loading-example)
   - One of the primary use cases for proxies is lazy loading. In situations where creating or initializing an object is resource-intensive, the proxy delays the creation of the real object until it is actually needed.
   - This can lead to improved performance by avoiding unnecessary resource allocation.
-- [Access Control:](#271-access-control-example)
-  - Proxies can enforce access control policies.
-  - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
 - [Caching:](#caching-and-lazy-loading-example)
   - Proxies can implement caching mechanisms to store results or resources.
   - This is particularly useful when repeated operations on a real object can be optimized by caching previous results, avoiding redundant computations or data fetching.
+- [Access Control:](#271-access-control-example)
+  - Proxies can enforce access control policies.
+  - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
 - [Logging and Monitoring:](#272-logging-example)
   - Proxies provide a convenient point to add logging or monitoring functionalities.
   - By intercepting method calls to the real object, proxies can log information, track usage, or measure performance without modifying the real object.
 
-### 2.2.5 When to use Proxy Design Pattern?
 
-- Deferred Object Creation:
-- Access Control and Permissions:
-- Resource Optimization:
-- Remote Object Interaction:
-
-### 2.2.6 When not to use Proxy Design Pattern?
-
-- Overhead for Simple Operations:
-- Unnecessary Abstraction:
-- Performance Impact:
-- When Access Control Isn’t Needed:
-- When Eager Loading is Acceptable:
-
-### 2.7 More Examples on Proxy Design Pattern
+### 2.2.5 More Examples on Proxy Design Pattern
 
 [⬆️](#table-of-contents)
-- [Access Control](#271-access-control-example)
-- [Logging Example](#272-logging-example)
+- [Access Control](#2251-access-control-example)
+- [Logging Example](#2252-logging-example)
 
 Let's say you have a `SensitiveData` class that represents some sensitive information that should only be accessed by authorized users. You can use a proxy to control access to this data.
 
 
-#### [2.7.1 Access Control Example](#27-more-examples-on-proxy-design-pattern)
+#### [2.2.5.1 Access Control Example](#225-more-examples-on-proxy-design-pattern)
 
 
 ##### 1\. **Subject Interface**
@@ -1661,8 +1648,9 @@ public class Client {
 }
 ```
 
+[⬆️ why we need proxy design pattern](#224-why-do-we-need-proxy-design-pattern)
 
-### [2.7.2 Logging Example](#27-more-examples-on-proxy-design-pattern)
+### [2.2.5.2 Logging Example](#2252-more-examples-on-proxy-design-pattern)
 Let's consider a banking system where we want to log every transaction made by a user. We'll use a proxy to log the details of each transaction before passing the request to the real bank account object.
 
 ### 1\. **Subject Interface**
@@ -1775,11 +1763,28 @@ Wed Aug 27 12:00:02 UTC 2024 - Logging: Get Balance of 1050.0
 Final Balance: 1050.0
 
 ```
+
+### 2.2.6 When to use Proxy Design Pattern?
+
+- Deferred Object Creation:
+- Access Control and Permissions:
+- Resource Optimization:
+- Remote Object Interaction:
+
+### 2.2.7 When not to use Proxy Design Pattern?
+
+- Overhead for Simple Operations:
+- Unnecessary Abstraction:
+- Performance Impact:
+- When Access Control Isn’t Needed:
+- When Eager Loading is Acceptable:
+
 ## 2.3 Strategy
 
 [⬆️Back To Top](#table-of-contents)
 
-A strategy pattern is a behavioral design pattern that allows the `behavior` of an object to be selected at `runtime`. It is one of the `Gang of Four (GoF)` design patterns, which are widely used in object-oriented programming. In simpler terms, The Strategy Design Pattern defines `a family of algorithms`, `encapsulates each one`, and makes them `interchangeable`, `allowing clients to switch algorithms dynamically without altering the code structure.`
+A strategy pattern is a behavioral design pattern that allows the `behavior` of an object to be selected at `runtime`. It is one of the `Gang of Four (GoF)` design patterns, which are widely used in object-oriented programming. 
+
 
 > Characteristics of the Strategy Design Pattern?
 
@@ -1792,37 +1797,41 @@ A strategy pattern is a behavioral design pattern that allows the `behavior` of 
 - It promotes object collaboration:
   - The pattern encourages collaboration between a context object and strategy objects, where the context delegates the execution of a behavior to a strategy object.
 
-> Components of the Strategy Design Pattern
+### 2.3.1 Components of the Strategy Design Pattern
 
-1. Context
-2. Strategy Interface
-3. Concrete Strtegies
-4. Client
+1. **Context:** The Context is a class or object that holds a reference to a strategy object and delegates the task to it.
+2. **Strategy Interface:** The Strategy Interface is an interface or abstract class that defines a set of methods that all concrete strategies must implement.
+3. **Concrete Strtegies:** Concrete Strategies are the various implementations of the Strategy Interface. Each concrete strategy provides a specific algorithm or behavior for performing the task defined by the Strategy Interface.
+4. **Client:** The Client is responsible for selecting and configuring the appropriate strategy and providing it to the Context.
 
-> Communication between the Components
+### 2.3.2 Communication between the Components
 
 In the Strategy Design Pattern, communication between the components occurs in a structured and decoupled manner. Here’s how the components interact with each other:
 
+![Strategy Components](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/proxy-generic.png?raw=true)
+
+
+Communications between components: 
 - Client to Context:
-  - The Client, which knows the requirements of the task, interacts with the Context to initiate the task execution.
-  - The Client selects an appropriate strategy based on the task requirements and provides it to the Context.
-  - The Client may configure the selected strategy before passing it to the Context if necessary.
+  - The Client, **which knows the requirements** of the task, **interacts with the Contex**t to initiate the task execution.
+  - The Client **selects an appropriate strategy** based on the task requirements and provides it to the Context.
+  - The Client **may configure** the selected strategy before passing it to the Context if necessary.
 - Context to Strategy:
-  - The Context holds a reference to the selected strategy and delegates the task to it.
-  - The Context invokes a method on the strategy object, triggering the execution of the specific algorithm or behavior encapsulated within the strategy.
+  - The Context **holds a reference** to the selected strategy and **delegates** the task to it.
+  - The Context **invokes a method on the strategy object**, triggering the execution of the specific algorithm or behavior encapsulated within the strategy.
 - Strategy to Context:
-  - Once the strategy completes its execution, it may return a result or perform any necessary actions.
-  - The strategy communicates the result or any relevant information back to the Context, which may further process or utilize the result as needed.
+  - Once the strategy completes its execution, it may return **a result** or perform any necessary actions.
+  - The strategy **communicates** the result or any relevant information **back to the Context**, which may further process or utilize the result as needed.
 - Strategy Interface as Contract:
-  - The Strategy Interface serves as a contract that defines a set of methods that all concrete strategies must implement.
-  - The Context communicates with strategies through the common interface, promoting interchangeability and decoupling.
+  - The **Strategy Interface serves as a contract** that defines a set of methods that **all concrete strategies** must implement.
+  - The Context communicates with strategies through the common interface, promoting interchangeability and **decoupling**.
 - Decoupled Communication:
-  - Communication between the components is decoupled, meaning that the Context does not need to know the specific details of how each strategy implements the task.
-  - Strategies can be swapped or replaced without impacting the client or other strategies, as long as they adhere to the common interface.
+  - Communication between the **components** is **decoupled**, *meaning that the Context does not need to know the specific details of how each strategy implements the task.*
+  - Strategies can be **swapped** or **replaced** without impacting the client or other strategies, as long as they adhere to the common interface.
 
 Overall, communication in the Strategy Design Pattern involves the Context class invoking a method on the selected strategy object, which triggers the execution of a specific algorithm or behavior to perform a task. This separation of task execution from the selection and configuration of the strategy promotes flexibility, modularity, and code reusability within the software system.
 
-> Real-World Analogy of Strategy Design Pattern
+### 2.3.3 Real-World Analogy of Strategy Design Pattern
 
 Imagine you’re planning a trip to a new city, and you have several options for getting there: by car, by train, or by plane. Each mode of transportation offers its own set of advantages and disadvantages, depending on factors such as cost, travel time, and convenience.
 
@@ -1842,9 +1851,9 @@ Imagine you’re planning a trip to a new city, and you have several options for
   - The Strategy Design Pattern allows you to dynamically select the best strategy (transportation mode) based on changing circumstances.
   - For instance, if your initial flight is canceled due to bad weather, you can quickly switch to an alternative mode of transportation, such as taking a train or renting a car, without having to change your overall travel plans drastically.
 
-> Strategy Design Pattern Example
+#### 2.3.3.1 Strategy Design Pattern Example
 
-Let’s consider a sorting application where we need to sort a list of integers. However, the sorting algorithm to be used may vary depending on factors such as the size of the list and the desired performance characteristics.
+Let’s consider a sorting application where we need to sort a list of integers. However, the **sorting algorithm** to be used may vary depending on factors such as the **size of the list** and the **desired performance characteristics**.
 
 > Challenges Without Using Strategy Pattern:
 
@@ -1861,12 +1870,6 @@ Let’s consider a sorting application where we need to sort a list of integers.
 
 The Strategy Design Pattern addresses these challenges by encapsulating each sorting algorithm into separate classes. This allows for better organization, code reuse, and flexibility in the system. Here’s how the Strategy Pattern helps:
 
-- Code Reusability:
-  > By encapsulating sorting algorithms into separate strategy classes, you can reuse these strategies across different parts of the system. This reduces code duplication and promotes maintainability.
-- Flexibility and Extensibility:
-  > With the Strategy Pattern, you can easily add new sorting algorithms or change existing ones without modifying existing code. Each strategy is independent and can be swapped or extended without affecting other parts of the system.
-- Separation of Concerns:
-  > The Strategy Pattern promotes a clean separation of concerns by isolating sorting logic into separate strategy classes. This improves code readability, testability, and maintainability.
 
 Complete Code of the above example:
 
@@ -2040,8 +2043,17 @@ Sorting using Bubble Sort
 Sorting using Merge Sort
 Sorting using Quick Sort
 ```
+### 2.3.3 Advantages of the Strategy Design Pattern
 
-### 2.3.1 When to use the Strategy Design Pattern?
+Below are the advantages of the strategy design pattern:
+
+- A family of algorithms can be defined as a class hierarchy and can be used interchangeably to alter application behavior without changing its architecture.
+- By encapsulating the algorithm separately, new algorithms complying with the same interface can be easily introduced.
+- The application can switch strategies at run-time.
+- Strategy enables the clients to choose the required algorithm, **without using a “switch” statement or a series of “if-else”** statements.
+- Data structures used for implementing the algorithm are completely encapsulated in Strategy classes. Therefore, the implementation of an algorithm can be changed without affecting the Context class.
+
+### 2.3.4 When to use the Strategy Design Pattern?
 
 Here are some situations where you should consider using the Strategy pattern:
 
@@ -2056,7 +2068,7 @@ Here are some situations where you should consider using the Strategy pattern:
 - Testing and Extensibility:
   > When you want to facilitate easier unit testing by enabling the substitution of algorithms with mock objects or stubs. Additionally, the Strategy pattern makes it easier to extend the system with new algorithms without modifying existing code.
 
-### 2.3.2 When not to use the Strategy Design Pattern?
+### 2.3.5 When not to use the Strategy Design Pattern?
 
 Here are some situations where you should consider not using the Strategy pattern:
 
@@ -2067,17 +2079,9 @@ Here are some situations where you should consider not using the Strategy patter
 - Inflexible Context:
   If the context class tightly depends on a single algorithm and there is no need for flexibility or interchangeability, using the Strategy pattern may introduce unnecessary abstraction and complexity.
 
-### 2.3.3 Advantages of the Strategy Design Pattern
 
-Below are the advantages of the strategy design pattern:
 
-- A family of algorithms can be defined as a class hierarchy and can be used interchangeably to alter application behavior without changing its architecture.
-- By encapsulating the algorithm separately, new algorithms complying with the same interface can be easily introduced.
-- The application can switch strategies at run-time.
-- Strategy enables the clients to choose the required algorithm, without using a “switch” statement or a series of “if-else” statements.
-- Data structures used for implementing the algorithm are completely encapsulated in Strategy classes. Therefore, the implementation of an algorithm can be changed without affecting the Context class.
-
-### 2.3.4 Disadvantages the Strategy Design Pattern
+### 2.3.6 Disadvantages the Strategy Design Pattern
 
 Below are the disadvantages of the strategy design pattern:
 
