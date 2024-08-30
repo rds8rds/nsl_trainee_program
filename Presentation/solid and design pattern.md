@@ -278,7 +278,7 @@ class Triangle extends Shape {
 - **Enhanced Maintainability:** Reduces the need to modify existing code when adding new features, making the codebase easier to maintain.
 - **Increased Reusability:** Promotes code reuse by allowing new functionality to be added through extension rather than modification.
 - **Improved Flexibility:** Facilitates system evolution by accommodating new requirements with minimal disruption to existing code.
-- **Reduces the Risk of Regression:** Since OCP minimizes changes to existing code, it reduces the likelihood of introducing regression bugs (bugs that occur when a new feature breaks existing functionality).
+- **Reduces the Risk of Regression Bugs:** Since OCP minimizes changes to existing code, it reduces the likelihood of introducing regression bugs (bugs that occur when a new feature breaks existing functionality).
 
 ### Key Challenges and Considerations:
 - **Complexity in Design for initial phase:**
