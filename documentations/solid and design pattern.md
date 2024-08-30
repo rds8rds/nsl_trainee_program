@@ -182,10 +182,10 @@ public class OCP {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Rectangle rectangle = new Rectangle(5, 10); // up casting 
-		Circle circle = new Circle(3);
+		Circle circle = new Circle(7);
 		AreaCalculator areaCalculator = new AreaCalculator();
-		System.out.println(areaCalculator.calculateArea(rectangle));
-		System.out.println(areaCalculator.calculateArea(circle)); 
+		System.out.println(areaCalculator.calculateArea(rectangle)); // prints 50
+		System.out.println(areaCalculator.calculateArea(circle)); // prints 153.94...
 		
 	}
 
@@ -238,13 +238,11 @@ Main Function
 ```java
 public class Main {
     public static void main(String[] args) {
-        Shape rectangle = new Rectangle(5, 10);
+        Shape rectangle = new Rectangle(5, 10); //overriding 
         Shape circle = new Circle(7);
 
-        AreaCalculator calculator = new AreaCalculator();
-
-        System.out.println("Rectangle area: " + calculator.calculateArea(rectangle)); // 50.0
-        System.out.println("Circle area: " + calculator.calculateArea(circle));       // 153.94...
+        System.out.println("Rectangle area: " + rectangle.calculateArea()); // 50.0
+        System.out.println("Circle area: " + circle.calculateArea());       // 153.94...
     }
 }
 ```

@@ -126,13 +126,7 @@ public class ReportSaver {
 In doing so, we stop ourselves from modifying existing code and causing potential new bugs in an otherwise happy application.
 
 Of course, the **one exception to the rule is when fixing bugs in existing code. 🤔**
-
-**Benefits:**
-
-- Enhanced Maintainability: Reduces the need to modify existing code when adding new features, making the codebase easier to maintain.
-- Increased Reusability: Promotes code reuse by allowing new functionality to be added through extension rather than modification.
-- Improved Flexibility: Facilitates system evolution by accommodating new requirements with minimal disruption to existing code.
-- Reduces the Risk of Regression:Since OCP minimizes changes to existing code, it reduces the likelihood of introducing regression bugs (bugs that occur when a new feature breaks existing functionality). 
+ 
 
 
 ### **Example:** Violation of OCP
@@ -140,7 +134,7 @@ Of course, the **one exception to the rule is when fixing bugs in existing code.
 Here’s an example where the **Shape class** violates the Open/Closed Principle:
 
 ```java
-class Shape {
+class AreaCalculator {
     // no extention
     public double calculateArea(Object shape) {
         // checking instance type
@@ -183,14 +177,21 @@ public class OCP {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Rectangle rectangle = new Rectangle(5, 10); // up casting 
-		Circle circle = new Circle(3);
+		Circle circle = new Circle(7);
 		AreaCalculator areaCalculator = new AreaCalculator();
-		System.out.println(areaCalculator.calculateArea(rectangle));
-		System.out.println(areaCalculator.calculateArea(circle)); 
+		System.out.println(areaCalculator.calculateArea(rectangle)); // prints 50
+		System.out.println(areaCalculator.calculateArea(circle)); // prints 153.94...
 		
 	}
 
 }
+```
+
+Output
+
+```css
+Rectangle area: 50.0
+Circle area: 153.94
 ```
 **Problems:**
 
@@ -239,15 +240,18 @@ Main Function
 ```java
 public class Main {
     public static void main(String[] args) {
-        Shape rectangle = new Rectangle(5, 10);
+        Shape rectangle = new Rectangle(5, 10); //overriding 
         Shape circle = new Circle(7);
-
-        AreaCalculator calculator = new AreaCalculator();
-
-        System.out.println("Rectangle area: " + calculator.calculateArea(rectangle)); // 50.0
-        System.out.println("Circle area: " + calculator.calculateArea(circle));       // 153.94...
+        System.out.println("Rectangle area: " + rectangle.calculateArea()); // 50.0
+        System.out.println("Circle area: " + circle.calculateArea());       // 153.94...
     }
 }
+```
+Output
+
+```css
+Rectangle area: 50.0
+Circle area: 153.94
 ```
 
 **Adding new shape Triangle**
@@ -269,16 +273,21 @@ class Triangle extends Shape {
 }
 
 ```
+**Benefits:**
+
+- **Enhanced Maintainability:** Reduces the need to modify existing code when adding new features, making the codebase easier to maintain.
+- **Increased Reusability:** Promotes code reuse by allowing new functionality to be added through extension rather than modification.
+- **Improved Flexibility:** Facilitates system evolution by accommodating new requirements with minimal disruption to existing code.
+- **Reduces the Risk of Regression:** Since OCP minimizes changes to existing code, it reduces the likelihood of introducing regression bugs (bugs that occur when a new feature breaks existing functionality).
+
 ### Key Challenges and Considerations:
-- **Complexity in Design:**
+- **Complexity in Design for initial phase:**
     
     - Designing a system that adheres to OCP can require a more complex and abstract design, involving interfaces or abstract classes. This can make the initial design more challenging and harder to understand.
 - **Difficulty in Predicting Future Requirements:**
     
     - It can be challenging to anticipate how the system will need to evolve. If future requirements are not well understood, designing a system to be easily extensible might result in a design that doesn’t fit the actual needs.
-- **Increased Development Time:**
-    
-    - Implementing OCP may require additional time for designing and implementing the necessary abstractions and extensions, potentially impacting development timelines.
+
 ## 1.3 Liskov Substitution Principle
 
 [⬆️Back To Top](#table-of-contents)
@@ -816,21 +825,20 @@ public class Main {
 
 [⬆️Back To Top](#table-of-contents)
 
-Design patterns are general, reusable solutions to common problems that arise in software design. They represent best practices and are based on the experiences and insights of skilled software developers. Design patterns provide a standardized approach to solving problems that can be applied across various types of software projects.
+Design patterns are **general, reusable solutions to common problems** that arise in **software design**. They represent best practices and are based on the experiences and insights of skilled software developers. Design patterns provide a standardized approach to solving problems that can be applied across various types of software projects.
 
 **Key Aspects of Design Patterns:**
 
-- Reusability
-- Common Language
-- Best Practices
-- Flexibility
+- Reusability [ developers can avoid reinventing the wheel, instead reusing established solutions for same calss of problem ]
+- Common Language [ all developer can understand its objective ]
+- Flexibility [ require less change when scaling ]
 
 ### Types of Design Patterns:
 
 1. **Creational Patterns** 
 > Creational Design Pattern abstract the instantiation process. They help in making a system **independent** of how its **objects** are **created, composed and represented**.
 
-   - a. Builder
+   - a. [Builder](#21-builder)
    - b. Factory
    - c. Singleton
    - d. Prototype
@@ -838,14 +846,14 @@ Design patterns are general, reusable solutions to common problems that arise in
 2. **Structural Patterns**
 > Structural patterns are concerned with how classes and objects are **composed to form larger structures.** Structural class patterns use **inheritance** to compose interfaces or implementations.
 
-   - a. Proxy
+   - a. [Proxy](#22-proxy)
    - b. Facade
    - c. Decorator
    - d. Adapter 
 
 3. **Behavioral Patterns**
 > Behavioral patterns are concerned with algorithms and the assignment of responsibilities between objects. Behavioral patterns **describe not just patterns of objects or classes** but also the **patterns of communication between them.**
-   - a. Strategy
+   - a. [Strategy](#23-strategy)
    - b. Observer
    - c. Command
    - d. Chain of Responsibility
@@ -1552,6 +1560,9 @@ Displaying image: example.jpg
 
 ### 2.2.4 Why do we need Proxy Design Pattern?
 
+[⬆️Back To Top](#table-of-contents)
+
+
 The Proxy Design Pattern is employed to address various concerns and scenarios in software development, providing a way to control access to objects, add functionality, or optimize performance.
 
 - [Lazy Loading:](#caching-and-lazy-loading-example)
@@ -1560,15 +1571,18 @@ The Proxy Design Pattern is employed to address various concerns and scenarios i
 - [Caching:](#caching-and-lazy-loading-example)
   - Proxies can implement caching mechanisms to store results or resources.
   - This is particularly useful when repeated operations on a real object can be optimized by caching previous results, avoiding redundant computations or data fetching.
-- [Access Control:](#271-access-control-example)
+- [Access Control:](#2251-access-control-example)
   - Proxies can enforce access control policies.
   - By acting as a gatekeeper to the real object, proxies can restrict access based on certain conditions, providing security or permission checks.
-- [Logging and Monitoring:](#272-logging-example)
+- [Logging and Monitoring:](#2252-logging-example)
   - Proxies provide a convenient point to add logging or monitoring functionalities.
   - By intercepting method calls to the real object, proxies can log information, track usage, or measure performance without modifying the real object.
 
 
 ### 2.2.5 More Examples on Proxy Design Pattern
+
+<details>
+ <summary>click here to expand </summary>
 
 [⬆️](#table-of-contents)
 - [Access Control](#2251-access-control-example)
@@ -1698,6 +1712,9 @@ public class RealBankAccount implements BankAccount {
     }
 }
 ```
+</details>
+
+
 ### 3\. **Proxy**
 
 The proxy class will add logging functionality by logging each method call and then delegating the actual work to the real bank account.
