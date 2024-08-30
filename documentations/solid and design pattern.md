@@ -240,7 +240,6 @@ public class Main {
     public static void main(String[] args) {
         Shape rectangle = new Rectangle(5, 10); //overriding 
         Shape circle = new Circle(7);
-
         System.out.println("Rectangle area: " + rectangle.calculateArea()); // 50.0
         System.out.println("Circle area: " + circle.calculateArea());       // 153.94...
     }
@@ -1350,7 +1349,7 @@ The Proxy Design Pattern is a `structural design` pattern that provides a `surro
 
 > Real world example:
 
-A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of cash and provides a means of accessing that cash when required.
+A real-world example can be `a cheque or credit card` as a proxy for what is in our bank account. It can be used in place of a bank account and provides a means of accessing that cash when required.
 
 > 3 Components of Proxy Design Pattern
 
@@ -2094,3 +2093,8 @@ Below are the disadvantages of the strategy design pattern:
 
 - [Uncle Bob SOLID principle](https://www.youtube.com/watch?v=zHiWqnTWsn4&t=302s)
 - [Head First Design Pattern](https://github.com/rds8rds/nsl_trainee_program/blob/main/books/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D-1.pdf)
+
+## Some basics of UML: 
+![uml basics 1](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml%20basic%201.png?raw=true)
+
+![uml basics 2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml%20basic%202.jpg?raw=true)
