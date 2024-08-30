@@ -1786,7 +1786,6 @@ Final Balance: 1050.0
 - Deferred Object Creation:
 - Access Control and Permissions:
 - Resource Optimization:
-- Remote Object Interaction:
 
 ### 2.2.7 When not to use Proxy Design Pattern?
 
