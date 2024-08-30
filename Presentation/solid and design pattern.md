@@ -25,7 +25,7 @@
 
 # 1. SOLID Principle
 
-Design principles encourage us to create more maintainable, understandable, and flexible software. Consequently, as our applications grow in size, we can reduce their complexity and save ourselves a lot of headaches further down the road!
+Design principles encourage us to create **more maintainable, understandable, and flexible software.** Consequently, as our applications grow in size, we can reduce their complexity and save ourselves a lot of headaches further down the road!
 
 The following **five** concepts make up our SOLID principles:
 
@@ -1712,8 +1712,6 @@ public class RealBankAccount implements BankAccount {
     }
 }
 ```
-</details>
-
 
 ### 3\. **Proxy**
 
@@ -1781,6 +1779,8 @@ Final Balance: 1050.0
 
 ```
 
+</details>
+
 ### 2.2.6 When to use Proxy Design Pattern?
 
 - Deferred Object Creation:
@@ -1821,7 +1821,28 @@ A strategy pattern is a behavioral design pattern that allows the `behavior` of 
 3. **Concrete Strtegies:** Concrete Strategies are the various implementations of the Strategy Interface. Each concrete strategy provides a specific algorithm or behavior for performing the task defined by the Strategy Interface.
 4. **Client:** The Client is responsible for selecting and configuring the appropriate strategy and providing it to the Context.
 
-### 2.3.2 Communication between the Components
+### 2.3.2 Real-World Analogy of Strategy Design Pattern
+
+Imagine you’re **planning a trip to a new city,** and you have several options for getting there: **by car, by train, or by plane.** Each mode of transportation offers its own set of **advantages and disadvantages,** depending on factors such as **cost, travel time, and convenience.**
+
+- **Context**
+  You, as the **traveler**, represent the context in this analogy. You have a **specific goal** (reaching the new city) and need to **choose the best transportation strategy to achieve it.**
+- **Strategies**
+  The **different modes of transportation (car, train, plane)** represent the strategies in this analogy. Each strategy (mode of transportation) **offers a different approach to reaching your destination.**
+
+- **Interface**
+  - The interface in this **analogy** is the **set of common criteria** you consider when choosing a transportation mode, such as **cost, travel time, and convenience.**
+  - These criteria serve as the common interface that all strategies must adhere to.
+- **Flexibility**:
+  - Just as the Strategy Design Pattern allows you to dynamically switch between different algorithms at runtime, you have the f**lexibility to choose a transportation** mode **based on your specific requirements and constraints.**
+  - For example, if you value speed and are willing to pay more, you might choose to fly.
+  - If you prioritize cost-effectiveness and don’t mind a longer travel time, you might opt for a train or car.
+- **Dynamic Selection**:
+  - The Strategy Design Pattern allows you to dynamically select the best strategy (transportation mode) based on changing circumstances.
+  - For instance, if your initial flight is canceled due to bad weather, you can quickly switch to an alternative mode of transportation, such as taking a train or renting a car, without having to change your overall travel plans drastically.
+
+
+### 2.3.3 Communication between the Components
 
 In the Strategy Design Pattern, communication between the components occurs in a structured and decoupled manner. Here’s how the components interact with each other:
 
@@ -1842,31 +1863,13 @@ In the Strategy Design Pattern, communication between the components occurs in a
 - **Strategy Interface as Contract:**
   - The **Strategy Interface serves as a contract** that defines a set of methods that **all concrete strategies** must implement.
   - The Context communicates with strategies through the common interface, promoting interchangeability and **decoupling**.
-- Decoupled Communication:
+- **Decoupled Communication:**
   - Communication between the **components** is **decoupled**, *meaning that the Context does not need to know the specific details of how each strategy implements the task.*
   - Strategies can be **swapped** or **replaced** without impacting the client or other strategies, as long as they adhere to the common interface.
 
 Overall, communication in the Strategy Design Pattern involves the Context class invoking a method on the selected strategy object, which triggers the execution of a specific algorithm or behavior to perform a task. This separation of task execution from the selection and configuration of the strategy promotes flexibility, modularity, and code reusability within the software system.
 
-### 2.3.3 Real-World Analogy of Strategy Design Pattern
 
-Imagine you’re planning a trip to a new city, and you have several options for getting there: by car, by train, or by plane. Each mode of transportation offers its own set of advantages and disadvantages, depending on factors such as cost, travel time, and convenience.
-
-- Context
-  You, as the traveler, represent the context in this analogy. You have a specific goal (reaching the new city) and need to choose the best transportation strategy to achieve it.
-- Strategies
-  The different modes of transportation (car, train, plane) represent the strategies in this analogy. Each strategy (mode of transportation) offers a different approach to reaching your destination.
-
-- Interface
-  - The interface in this analogy is the set of common criteria you consider when choosing a transportation mode, such as cost, travel time, and convenience.
-  - These criteria serve as the common interface that all strategies must adhere to.
-- Flexibility:
-  - Just as the Strategy Design Pattern allows you to dynamically switch between different algorithms at runtime, you have the flexibility to choose a transportation mode based on your specific requirements and constraints.
-  - For example, if you value speed and are willing to pay more, you might choose to fly.
-  - If you prioritize cost-effectiveness and don’t mind a longer travel time, you might opt for a train or car.
-- Dynamic Selection:
-  - The Strategy Design Pattern allows you to dynamically select the best strategy (transportation mode) based on changing circumstances.
-  - For instance, if your initial flight is canceled due to bad weather, you can quickly switch to an alternative mode of transportation, such as taking a train or renting a car, without having to change your overall travel plans drastically.
 
 #### 2.3.3.1 Strategy Design Pattern Example
 
@@ -2064,7 +2067,7 @@ Sorting using Quick Sort
 
 Below are the advantages of the strategy design pattern:
 
-- A family of algorithms can be defined as a class hierarchy and can be **used interchangeably** to alter application behavior without changing its **architecture**.
+- **A family of algorithms** can be defined as **a class hierarchy** and can be **used interchangeably** to alter application behavior without changing its **architecture**.
 - By **encapsulating** the algorithm separately, new algorithms complying with the **same interface** can be easily introduced.
 - The application **can switch strategies at run-time.**
 - Strategy enables the clients to choose the required algorithm, **without using a “switch” statement or a series of “if-else”** statements.
