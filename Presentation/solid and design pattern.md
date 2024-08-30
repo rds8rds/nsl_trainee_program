@@ -2080,4 +2080,4 @@ Below are the disadvantages of the strategy design pattern:
 ## Some basics of UML: 
 ![uml basics 1](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml-basic-1.png?raw=true)
 
-![uml basics 2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml-basic-2.png?raw=true)
+![uml basics 2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/solid%20and%20design%20pattern/uml-basic-2.jpg?raw=true)
