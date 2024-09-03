@@ -472,7 +472,7 @@ This property ensures that multiple transactions can occur concurrently without 
 Let ****X**** \= 500, ****Y**** \= 500.  
 Consider two transactions ****T**** and ****T”.****
 
-![atomicity-2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/normalization%20and%20acid%20property/atomiticity-2.jpg)
+![atomicity-2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/normalization%20and%20acid%20property/atomicity-2.jpg)
 
 
 Suppose ****T**** has been executed till ****Read (Y)**** and then ****T’’**** starts. As a result, interleaving of operations takes place due to which ****T’’**** reads the correct value of ****X**** but the incorrect value of ****Y**** and sum computed by  
