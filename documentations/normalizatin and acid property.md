@@ -442,7 +442,7 @@ Normalization is a crucial aspect of database design, ensuring that the database
 A [****transaction****](https://www.geeksforgeeks.org/sql-transactions) is a single logical unit of work that accesses and possibly modifies the contents of a database. Transactions access data using read and write operations.  
 In order to maintain consistency in a database, before and after the transaction, certain properties are followed. These are called ****ACID**** properties.
 
-[acid](#link)
+![acid-properties.jpg](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/normalization%20and%20acid%20property/ACID-Properties.jpg)
 
 ## [3.1 Atomicity:](#table-of-contents)
 
@@ -452,7 +452,8 @@ By this, we mean that either the entire transaction takes place at once or doesn
 Atomicity is also known as the ‘All or nothing rule’.
 
 Consider the following transaction ****T**** consisting of ****T1**** and ****T2**** : Transfer of 100 from account ****X**** to account ****Y**** .
-[atomicity-1](#link)
+
+![atomicity-1](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/normalization%20and%20acid%20property/atomicity-1.jpg)
 
 
 If the transaction fails after completion of ****T1**** but before completion of ****T2**** .( say, after ****write(X)**** but before ****write(Y)**** ), then the amount has been deducted from ****X**** but not added to ****Y**** . This results in an inconsistent database state. Therefore, the transaction must be executed in its entirety in order to ensure the correctness of the database state.
@@ -471,7 +472,7 @@ This property ensures that multiple transactions can occur concurrently without 
 Let ****X**** \= 500, ****Y**** \= 500.  
 Consider two transactions ****T**** and ****T”.****
 
-[atomiticity-2](#link)
+![atomicity-2](https://github.com/rds8rds/nsl_trainee_program/blob/main/images/normalization%20and%20acid%20property/atomiticity-2.jpg)
 
 
 Suppose ****T**** has been executed till ****Read (Y)**** and then ****T’’**** starts. As a result, interleaving of operations takes place due to which ****T’’**** reads the correct value of ****X**** but the incorrect value of ****Y**** and sum computed by  
